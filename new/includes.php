@@ -1,5 +1,9 @@
 <?php
 $thisis = "php";
+function php(){
+    $whatisthis = "it's php!";
+}
+
 ?>
 
 <link rel="canonical" href="https://archive.osu.hubza.co.uk" />
