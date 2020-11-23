@@ -1,0 +1,23 @@
+.hedlogoa {
+    display: block !important;
+    margin: auto !important;
+    height: 40px !important;
+    padding-top: 30px;
+}
+
+.logosub {
+    padding-top: 10px !important;
+    font-size: 15px !important;
+    margin: auto !important;
+    text-align: center !important;
+    background: -webkit-linear-gradient(0deg, rgba(0, 134, 218, 1) 0%, rgba(0, 159, 218, 1) 100%);
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    font-weight: 550 !important;
+    padding-bottom: 30px !important;
+    font-size: 20px;
+}
+
+a {
+    text-decoration: none;
+}
