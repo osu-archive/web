@@ -11,21 +11,8 @@ if($search == ""){
     $sql = "SELECT * FROM versions ORDER BY ReleaseDate DESC";
 }else{
     $queryinput = "%" . htmlspecialchars(addslashes($search)) . "%";
-    $sql = "SELECT * FROM versions WHERE Name LIKE '" . $queryinput . "' OR Archiver LIKE '" . $queryinput . "' OR VersionInfo LIKE '" . $queryinput . "' OR Version LIKE '" . $queryinput . "'";
-    
-    $sql .= "ORDER BY ReleaseDate DESC";
+    $sql = "SELECT * FROM versions WHERE Name LIKE '" . $queryinput . "' OR Archiver LIKE '" . $queryinput . "' OR VersionInfo LIKE '" . $queryinput . "' OR Version LIKE '" . $queryinput . "' ORDER BY ReleaseDate DESC";
 }
-
-$sqlnews = "SELECT * FROM news ORDER BY date DESC";
-$news = $db->query($sqlnews);
-
-$t3sql = "SELECT COUNT(ID) AS SubmittedVersions, Archiver, ArchiverID, ArchiverURL
-FROM versions
-GROUP BY Archiver, ArchiverID
-ORDER BY COUNT(ID) DESC
-LIMIT 3"; // sql by mulraf
-
-$t3 = $db->query($t3sql);
 
 ?>
 
@@ -33,6 +20,15 @@ $t3 = $db->query($t3sql);
 include("navbar.php");
 
 ?>
+
+<head>
+    <meta charset="utf-8">
+    <title>osu!archive - archiving all the osu!game versions for the future</title>
+    <meta name="keywords" content="osu,game,archive,old,versions,osu!">
+    <meta name="description" content="we have loads of versions, from the oldest known version, to triangles, to an interesting benchmark version, and more!">
+    <meta name="author" content="Hubz">
+    <link rel="canonical" href="https://archive.osu.hubza.co.uk"/>
+</head>
 
 
 <div class="page home">
@@ -118,7 +114,7 @@ include("navbar.php");
                         </div>
                     </div>
                     <div class="download-button">
-                        <a class="db-download" href="info?v=<?php echo $val['Version']; ?>">View more & Download!</a>
+                        <a class="db-download" href="info.php?Version=<?php echo $val['Version']; ?>">View more & Download!</a>
                     </div>
                 </div>
             </div>
@@ -138,41 +134,6 @@ include("navbar.php");
     <div class="news">
         <div class="v-header">
             <div class="vh-top">
-                <p class="vh-text">Top 3 uploaders</p>
-            </div>
-            <div class="vh-botton">
-                <p class="vh-text-small">The top archivers from the osu!archive community!</p>
-            </div>
-        </div>
-        <div class="top3up-content">
-            <?php 
-            $count = 0;
-        while($val = $t3->fetch_assoc()) {
-            $count += 1;
-
-            $pfpurl = "";
-            $afa = "SELECT * FROM t3users WHERE username = '" . $val['Archiver'] . "'";
-            $t3u = $db->query($afa);
-            while($val2 = $t3u->fetch_assoc()){
-                $pfpurl = $val2['pfp'];
-            }
-
-
-            ?>
-
-    
-            <div class="tu-user">
-                <img src="<?php echo $pfpurl; ?>" class="tuu-pfp">
-                <p class="tuu-username"><?php echo $val['Archiver']; ?></p>
-                <p class="tuu-rank">#<?php echo $count; ?> with <?php echo $val['SubmittedVersions'] ?> versions.</p>
-            </div>
-            <?php
-
-        }
-        ?>
-        </div>
-        <div class="v-header">
-            <div class="vh-top">
                 <p class="vh-text">News</p>
             </div>
             <div class="vh-botton">
@@ -180,24 +141,7 @@ include("navbar.php");
             </div>
         </div>
         <div class="n-content">
-            <?php 
-        while($val = $news->fetch_assoc()) {
-
-            ?>
-            <div class="n-panel"
-                style="background-image: url(https://upload.hubza.co.uk/i/osu%21_vkXaXvBqzB_2020-November-20.png);">
-                <div class="np-content">
-                    <p class="np-by">by <?php echo $val['author']; ?></p>
-                    <p class="np-title"><?php echo $val['postname']; ?></p>
-                    <p class="np-desc"><?php echo $val['short-desc']; ?></p>
-                    <a class="np-but">read more</a>
-                </div>
-            </div>
-            <?php
-
-        }
-
-        ?>
+            Coming Soon
         </div>
     </div>
 </div>
