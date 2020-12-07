@@ -312,6 +312,7 @@ body {
     -o-background-size: cover;
     background-size: cover;
     margin-top: 10px;
+    filter: drop-shadow(2px 2px 8px #0001);
 }
 
 .np-content {
@@ -366,6 +367,8 @@ body {
     padding: 8px;
     border: 1px solid var(--accenttrans);
     margin-top: 8px;
+    filter: drop-shadow(2px 2px 8px #0001);
+    background-color: #fff;
 }
 
 .tuu-pfp {

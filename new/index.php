@@ -34,6 +34,13 @@ include("navbar.php");
 
 ?>
 
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=0.6 ">
+</head>
 
 <div class="page home">
     <div class="versions">
@@ -160,7 +167,7 @@ include("navbar.php");
 
             ?>
 
-    
+
             <div class="tu-user">
                 <img src="<?php echo $pfpurl; ?>" class="tuu-pfp">
                 <p class="tuu-username"><?php echo $val['Archiver']; ?></p>
