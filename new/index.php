@@ -27,6 +27,11 @@ LIMIT 3"; // sql by mulraf
 
 $t3 = $db->query($t3sql);
 
+$versions = 0;
+$sqle = $db->query($sql);
+        while($val = $sqle->fetch_assoc()) {
+            $versions += 1;
+        }
 ?>
 
 <?php
@@ -47,7 +52,7 @@ include("navbar.php");
 
         <div class="v-header">
             <div class="vh-top">
-                <p class="vh-text">test</p>
+                <p class="vh-text">Versions <span style="font-weight: 200; "><?php echo $versions?></span></p>
             </div>
             <div class="vh-bottom">
                 <form action="./" method="get">
@@ -63,8 +68,8 @@ include("navbar.php");
         <div class="v-content">
             <?php
             $found = false;
-        $sql = $db->query($sql);
-        while($val = $sql->fetch_assoc()) {
+            $sqle = $db->query($sql);
+        while($val = $sqle->fetch_assoc()) {
 
             if(strtotime($val['DateAdded']) < strtotime("-2 days")){
                 $new = false;
