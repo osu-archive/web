@@ -40,7 +40,7 @@ include("navbar.php");
 
         <div class="v-header">
             <div class="vh-top">
-                <p class="vh-text">Versions</p>
+                <p class="vh-text">test</p>
             </div>
             <div class="vh-bottom">
                 <form action="./" method="get">
@@ -86,7 +86,7 @@ include("navbar.php");
                 <div class="texts">
                     <div class="ver-header">
                         <div class="name">
-                            <p class="verh-name"><?php echo $val['Name']; ?></p>
+                            <p class="verh-name"><?php echo $val['Version']; ?> </p>
                             <?php if($new == true){
                             ?>
 
@@ -99,7 +99,7 @@ include("navbar.php");
                             ?>
                         </div>
                         <div class="ver-arch">
-                            <p class="verh-version"><?php echo $val['Version']; ?> (<?php echo $val['category']; ?>)</p>
+                            <p class="verh-version"><?php echo date("F j, Y", strtotime($val['ReleaseDate'])); ?></p>
                             <p class="verh-archiver">archived by <strong><?php echo $val['Archiver']; ?></strong></p>
                         </div>
                     </div>
