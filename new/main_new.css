@@ -43,6 +43,15 @@
     --accenttrans: #009bda77;
 }
 
+@media (prefers-color-scheme: dark) {
+    * {
+        --fff: #111;
+        --accent: #fff;
+        --accentless: #fffd;
+        --accenttrans: #fff7;
+    }
+}
+
 body {
     background-color: var(--fff);
 }
@@ -50,6 +59,12 @@ body {
 .header {
     padding: 50px;
     background: linear-gradient(0deg, rgba(0, 134, 218, 1) 0%, rgba(0, 156, 218, 1) 100%);
+}
+
+@media (prefers-color-scheme: dark) {
+    .header {
+        background: linear-gradient(0deg, #2b2b2b 0%, var(--fff) 100%);
+    }
 }
 
 .ht-logo {
@@ -99,6 +114,13 @@ body {
     margin-bottom: 50px;
 }
 
+@media (prefers-color-scheme: dark) {
+    .page-divider {
+        background: var(--accenttrans);
+        width: 1px;
+    }
+}
+
 .versions {
     width: 60%;
 }
@@ -143,6 +165,7 @@ body {
     font-weight: 600;
     color: var(--accent);
     margin-left: 5px;
+    background-color: #0000;
 }
 
 .version {
@@ -328,6 +351,12 @@ body {
     background: linear-gradient(90deg, rgba(255, 255, 255, 0.9261905445772058) 0%, rgba(255, 255, 255, 0.7749300403755253) 100%);
 }
 
+@media (prefers-color-scheme: dark) {
+    .np-content {
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0.9261905445772058) 0%, rgba(0, 0, 0, 0.7749300403755253) 100%);
+    }
+}
+
 .np-by,
 .np-title,
 .np-desc {
@@ -368,7 +397,7 @@ body {
     border: 1px solid var(--accenttrans);
     margin-top: 8px;
     filter: drop-shadow(2px 2px 8px #0001);
-    background-color: #fff;
+    background-color: var(--fff);
 }
 
 .tuu-pfp {
@@ -422,4 +451,179 @@ body {
 
 .version {
     overflow: hidden;
+}
+
+.ver-cont {
+    padding: 50px;
+    padding-top: 43px;
+    box-sizing: border-box;
+}
+
+.screenshots {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+.ss-screenshot {
+    width: 32.5%;
+    margin-bottom: 25px;
+    border-radius: 15px;
+    filter: drop-shadow(5px 5px 26px #0002);
+}
+
+.ver-panel {
+    border-radius: 15px;
+    overflow: hidden;
+    filter: drop-shadow(5px 5px 26px #0002);
+    border: 1px solid var(--accenttrans);
+}
+
+.ver-panel-content {
+    background-color: var(--fff);
+    padding: 30px;
+}
+
+.blur-cont {
+    padding: 30px;
+    padding-bottom: 35px;
+    align-content: flex-end;
+    justify-content: flex-end;
+    align-items: flex-start;
+    backdrop-filter: blur(6px);
+    display: flex;
+    flex-direction: row;
+    background: #009CDAdd;
+}
+
+@media (prefers-color-scheme: dark) {
+    .blur-cont {
+        background: #000d;
+    }
+}
+
+.ver-panel-header {
+    background-color: black;
+    border-radius: 15px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.bc-right {
+    margin-left: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.bc-views,
+.bc-downloads {
+    display: flex;
+    color: white;
+    font-size: 18px;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+}
+
+.bcv-view-count,
+.bcd-download-count {
+    margin-left: 3px;
+}
+
+.bc-downloads {
+    margin-left: 16px;
+}
+
+.versionname {
+    color: white;
+    font-size: 38px;
+    font-weight: 700;
+}
+
+.vn-thin {
+    font-weight: 500;
+}
+
+.bc-date {
+    font-size: 25px;
+    color: white;
+    opacity: 0.81;
+}
+
+.bc-archiver {
+    font-size: 20px;
+    color: white;
+    margin-top: 3px;
+    opacity: 0.59;
+}
+
+.ver-panel {
+    margin-top: 10px;
+}
+
+.bca-name {
+    font-weight: 700;
+}
+
+.warning {
+    background-color: #FF99000a;
+    border: 1px solid #FF9900;
+    border-radius: 200px;
+    padding: 9px;
+    display: flex;
+    color: #FF9900;
+    font-size: 23px;
+    align-items: center;
+    justify-items: center;
+}
+
+.warning-text {
+    font-weight: 500;
+    font-size: 18px;
+    margin-left: 8px;
+    margin-bottom: 1px;
+    opacity: 0.8;
+}
+
+.vpc-description {
+    font-size: 21px;
+    color: var(--accent);
+    margin-bottom: 15px;
+}
+
+.vpcd-paddingtop {
+    margin-top: 15px;
+}
+
+.vpc-download-button {
+    border: 1px solid var(--accent);
+    padding: 10px;
+    border-radius: 50px;
+    color: var(--accent);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    transition: all 0.1s cubic-bezier(0, .23, 0, .93);
+    box-sizing: border-box;
+}
+
+.vpc-download-button:hover {
+    background-color: var(--accent);
+    color: var(--fff);
+}
+
+.dlb {
+    padding-right: 15px !important;
+}
+
+.db {
+    margin-left: 5px;
 }

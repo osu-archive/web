@@ -27,11 +27,21 @@ LIMIT 3"; // sql by mulraf
 
 $t3 = $db->query($t3sql);
 
+$sqllatest = "SELECT * FROM versions ORDER BY DateAdded DESC LIMIT 1";
+$sqllateste = $db->query($sqllatest);
+while($val = $sqllateste->fetch_assoc()) {
+    $screenshots = grabshots($val); 
+    $screenshot = $screenshots[0];
+}
+
 $versions = 0;
 $sqle = $db->query($sql);
-        while($val = $sqle->fetch_assoc()) {
-            $versions += 1;
-        }
+while($val = $sqle->fetch_assoc()) {
+    $versions += 1;
+    
+}
+
+        
 ?>
 
 <?php
@@ -40,10 +50,28 @@ include("navbar.php");
 ?>
 
 <head>
-    <meta charset="utf-8">
-    <title></title>
-    <meta name="author" content="">
-    <meta name="description" content="">
+    <!-- Primary Meta Tags -->
+    <title>osu!archive - archiving all the osu! versions from 2007 to now! </title>
+    <meta name="title" content="osu!archive - archiving all the osu! versions from 2007 to now! ">
+    <meta name="description"
+        content="your #1 place to get old & rare osu! versions, with an awesome Discord community and over 50 versions! ">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://archive.osu.hubza.co.uk/">
+    <meta property="og:title" content="osu!archive - archiving all the osu! versions from 2007 to now! ">
+    <meta property="og:description"
+        content="your #1 place to get old & rare osu! versions, with an awesome Discord community and over 50 versions! ">
+    <meta property="og:image" content="<?php echo $screenshot; ?>">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://archive.osu.hubza.co.uk/">
+    <meta property="twitter:title" content="osu!archive - archiving all the osu! versions from 2007 to now! ">
+    <meta property="twitter:description"
+        content="your #1 place to get old & rare osu! versions, with an awesome Discord community and over 50 versions! ">
+    <meta property="twitter:image" content="<?php echo $screenshot; ?>">
+
     <meta name="viewport" content="width=device-width, initial-scale=0.6 ">
 </head>
 
