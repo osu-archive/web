@@ -230,7 +230,7 @@ include("navbar.php");
                     <p class="np-by">by <?php echo $val['author']; ?></p>
                     <p class="np-title"><?php echo $val['postname']; ?></p>
                     <p class="np-desc"><?php echo $val['short-desc']; ?></p>
-                    <a class="np-but">read more</a>
+                    <a class="np-but" href="news?post=<?php echo $val['bname']; ?>">read more</a>
                 </div>
             </div>
             <?php

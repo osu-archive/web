@@ -521,6 +521,10 @@ body {
     justify-content: center;
 }
 
+.bc-left {
+    margin-left: 0px;
+}
+
 .bc-views,
 .bc-downloads {
     display: flex;
@@ -626,4 +630,10 @@ body {
 
 .db {
     margin-left: 5px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .newspost {
+        color: white !important;
+    }
 }

@@ -10,10 +10,14 @@ $sqlfinal = $db->query($sql);
 while($val = $sqlfinal->fetch_assoc()) {
     $screenshots = grabshots($val); 
     $screenshot = $screenshots[0];
+    $en = $val;
+    $desc = grabfirstsentence($val['VersionInfo']);
 }
 
 
 ?>
+
+
 
 <?php
 include("navbar.php");
@@ -22,25 +26,25 @@ include("navbar.php");
 
 <head>
     <!-- Primary Meta Tags -->
-    <title>osu!archive - archiving all the osu! versions from 2007 to now! </title>
-    <meta name="title" content="osu!archive - archiving all the osu! versions from 2007 to now! ">
+    <title>osu!archive • version - <?php echo $en['Name']; ?> (<?php echo $en['Version']; ?>)</title>
+    <meta name="title" content="osu!archive • version - <?php echo $en['Name']; ?> (<?php echo $en['Version']; ?>)">
     <meta name="description"
-        content="your #1 place to get old & rare osu! versions, with an awesome Discord community and over 50 versions! ">
+        content="<?php echo $desc; ?>">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://archive.osu.hubza.co.uk/">
-    <meta property="og:title" content="osu!archive - archiving all the osu! versions from 2007 to now! ">
+    <meta property="og:title" content="osu!archive • version - <?php echo $en['Name']; ?> (<?php echo $en['Version']; ?>)">
     <meta property="og:description"
-        content="your #1 place to get old & rare osu! versions, with an awesome Discord community and over 50 versions! ">
+        content="<?php echo $desc; ?>">
     <meta property="og:image" content="<?php echo $screenshot; ?>">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://archive.osu.hubza.co.uk/">
-    <meta property="twitter:title" content="osu!archive - archiving all the osu! versions from 2007 to now! ">
+    <meta property="twitter:title" content="osu!archive • version - <?php echo $en['Name']; ?> (<?php echo $en['Version']; ?>)">
     <meta property="twitter:description"
-        content="your #1 place to get old & rare osu! versions, with an awesome Discord community and over 50 versions! ">
+        content="<?php echo $desc; ?>">
     <meta property="twitter:image" content="<?php echo $screenshot; ?>">
 
     <meta name="viewport" content="width=device-width, initial-scale=0.6 ">
@@ -102,7 +106,7 @@ $usewarning = false;
                 <?php
                 }
                 ?>
-                <a class="vpc-download-button"><i class="fas fa-download"></i><p class="db">Download</p></a>
+                <a class="vpc-download-button" href="<?php echo $val['OADL-URL']; ?>"><i class="fas fa-download"></i><p class="db">Download</p></a>
             </div>
         </div>
         <div class="screenshots">
