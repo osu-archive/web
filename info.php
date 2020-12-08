@@ -1,137 +1,130 @@
-<?php
-// Initialize the session
-session_start();
-
-// Include config file
+<?php 
+include_once('generic.php'); 
+include("includes.php");
 include_once('config.php'); 
+include_once('parsedown.php'); 
 
-$bglink;
-$sql = $db->query("SELECT * FROM versions WHERE Version = '" . addslashes(htmlspecialchars($_GET['Version'])) . "' ORDER BY ReleaseDate Desc");
-$random = random_int(1, 4);
-$downloadCount;
-while($val = $sql->fetch_assoc()) {
-    $screen = "Screenshot" . $random;
-    $bglink = $val[$screen];
-    $downloadCount = $val['Views'];
-    $arrDescription = explode("<br>", $val['VersionInfo']);
+$sql = "SELECT * FROM versions WHERE `Version` = '" . htmlspecialchars(addslashes($_GET['v'])) . "'";
+
+$sqlfinal = $db->query($sql);
+while($val = $sqlfinal->fetch_assoc()) {
+    $screenshots = grabshots($val); 
+    $screenshot = $screenshots[0];
+    $en = $val;
+    $desc = grabfirstsentence($val['VersionInfo']);
+}
+
+
 ?>
 
-<!doctype html>
-<html lang="en">
+
+
+<?php
+include("navbar.php");
+
+?>
 
 <head>
-    <meta charset="utf-8">
+    <!-- Primary Meta Tags -->
+    <title>osu!archive • version - <?php echo $en['Name']; ?> (<?php echo $en['Version']; ?>)</title>
+    <meta name="title" content="osu!archive • version - <?php echo $en['Name']; ?> (<?php echo $en['Version']; ?>)">
+    <meta name="description"
+        content="<?php echo $desc; ?>">
 
-    <title>osu!archive | <?php echo $val['Name'] . " · " . $val['Version']; ?></title>
-    <meta name="description" content="<?php echo $arrDescription[0]; ?>">
-    <meta name="author" content="Hubz">
-    <meta property="og:image" content="<?php echo $val['Screenshot1']; ?>">
-    <meta name="keywords" content="osu,game,archive,old,versions,osu!">
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="infolisting.css">
-    <script src="https://kit.fontawesome.com/91ad005f46.js" crossorigin="anonymous"></script>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://archive.osu.hubza.co.uk/">
+    <meta property="og:title" content="osu!archive • version - <?php echo $en['Name']; ?> (<?php echo $en['Version']; ?>)">
+    <meta property="og:description"
+        content="<?php echo $desc; ?>">
+    <meta property="og:image" content="<?php echo $screenshot; ?>">
 
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://archive.osu.hubza.co.uk/">
+    <meta property="twitter:title" content="osu!archive • version - <?php echo $en['Name']; ?> (<?php echo $en['Version']; ?>)">
+    <meta property="twitter:description"
+        content="<?php echo $desc; ?>">
+    <meta property="twitter:image" content="<?php echo $screenshot; ?>">
+
+    <meta name="viewport" content="width=device-width, initial-scale=0.6 ">
 </head>
 
-<body>
-    <div class="background-image"></div>
-    <?php
-		include 'header.html';
-	?>
-    <div class="listing">
-        <div class="listingheader">
-            <h1 class="listingheadertext"><span class='mini'>Version Listing > </span><?php echo $val['Name']; ?><span
-                    class='mini'> >
-                    <?php echo $val['Version']; ?></span></h1>
+<div class="page panel">
+    <div class="ver-cont">
+        <div class="v-header">
+            <div class="vh-top">
+                <p class="vh-text"><span style="font-weight: 200; ">Versions / </span> <?php echo htmlspecialchars(addslashes($_GET['v'])); ?></p>
+            </div>
         </div>
-        <div class="listingcontent">
-            <div class="infocover">
+        <?php
+$sqlfinal = $db->query($sql);
 
-                <div class="textcontainer">
-                    <h1 class="ic-header"><?php echo $val['Name']; ?></h1>
-                    <h1 class="ic-version">
-                        <?php echo $val['Version'] . " · " . date("F", strtotime($val['ReleaseDate'])) . " " . date('j', strtotime($val['ReleaseDate'])) . date('S', strtotime($val['ReleaseDate'])) . " " . date('Y', strtotime($val['ReleaseDate'])); ?>
-                    </h1>
-                    <h1 class="archiver">archived by <a href="<?php echo $val['ArchiverURL']; ?>"><?php echo $val['Archiver'] ?></a></h1>
-                    <div class="c-vadinfo">
-                        <div class="c-views"><i class="fas fa-eye"></i> <?php echo $val['Views'] + 1; ?></div>
-                        
+while($val = $sqlfinal->fetch_assoc()) {
+
+    ?>
+        <div class="ver-panel">
+            <div class="ver-panel-header" style="background-image: url(<?php echo $screenshot; ?>)">
+                <div class="blur-cont">
+                    <div class="bc-left">
+                        <p class="versionname"><?php echo $val['Name']; ?> <span class="vn-thin"><?php echo $val['Version']; ?></span></p>
+                        <p class="bc-date"><?php echo date("F jS, Y", strtotime($val['ReleaseDate'])); ?></p>
+                        <p class="bc-archiver">archived by <a class="bca-name"><?php echo $val['Archiver']; ?></a></p>
+                    </div>
+                    <div class="bc-right">
+                        <div class="bc-views">
+                            <i class="fas fa-eye"></i>
+                            <p class="bcv-view-count"><?php echo $val['Views']; ?></p>
+                        </div>
+                        <div class="bc-downloads">
+                            <i class="fas fa-download dlb"></i>
+                            <p class="bcd-download-count"><?php echo $val['Downloads']; ?></p>
+                        </div>
                     </div>
                 </div>
-                <div class="bgimg"></div>
             </div>
-            <div class="vl-desc">
-                <h1 class="vl-desctext">
-                    <?php echo $val['VersionInfo']; ?>
-                </h1>
-                <div class="dlcont">
-                <a href="<?php echo $val['OADL-URL']; ?>"><button class="new-button listing-button">Download from osu!archive servers</button></a> 
-                <?php if(strlen($val['GDDL-URL']) > 10) { echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" . $val['GDDL-URL'] . "\"><button class=\"new-button listing-button\">Download from Google Drive</button></a>"; } ?>
-</div>
-            </div>
-            <div class="screenshots">
-            <div class="screenshotsheader">
-                <h1 class="ssh-text">Screenshots</h1>
-            </div>
+            <div class="ver-panel-content">
+                <?php
+$usewarning = false;
+                if(0 == 1){ 
+                    $usewarning = true;
 
-            <div class="ss-container">
-                <div class="ss-image">
-                    <img src="<?php echo $val['Screenshot1']; ?>" />
+                    ?>
+                <div class="warning">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <p class="warning-text">This version automatically updates when starting. Learn how to disable auto-update</p>
                 </div>
-                <div class="ss-image">
-                    <img src="<?php echo $val['Screenshot2']; ?>" />
+                <div class="warning">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <p class="warning-text">This version requires supporter. Learn how to enable supporter here.</p>
                 </div>
-                <div class="ss-image">
-                    <img src="<?php echo $val['Screenshot3']; ?>" />
-                </div>
-                <div class="ss-image">
-                    <img src="<?php echo $val['Screenshot4']; ?>" />
-                </div>
+                <?php
+                }
+                ?>  
+                <?php if($val['VersionInfo'] != ""){ ?>
+                <p class="vpc-description <?php if($usewarning == true) { echo "vpcd-paddingtop"; } ?>"><?php echo $val['VersionInfo']; ?></p>
+                <?php
+                }
+                ?>
+                <a class="vpc-download-button" href="<?php echo $val['OADL-URL']; ?>"><i class="fas fa-download"></i><p class="db">Download</p></a>
             </div>
         </div>
+        <div class="screenshots">
+            <?php
+            $screenshots = grabshots($val);
+                foreach ($screenshots as $value) {
+                    ?>
+                    <img src="
+                    <?php
+                    echo $value;
+                    ?>
+                    " class="ss-screenshot">
+                    <?php
+                }
+            ?>
         </div>
-        
-    </div>
-    </div>
-    <?php
-		include 'footer.html';
-	?>
-
-</body>
-<style>
-.background-image {
-    position: absolute;
-    left: 0;
-    top: 0;
-    background-image: linear-gradient(#fffd, #fffe), url(<?php echo $bglink; ?>);
-    background: no-repeat center center cover;
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 100%;
-    -webkit-filter: blur(5px);
-    -moz-filter: blur(5px);
-    -o-filter: blur(5px);
-    -ms-filter: blur(5px);
-    filter: blur(5px);
-    z-index: -51;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-repeat: no-repeat;
-  background-attachment: fixed;
-height: 120%;
+        <?php
 }
-
-.infocover {
-    background-image: linear-gradient(#fffe, #fffd), url(<?php echo $bglink; ?>);
-}
-
-<?php
-}
-$downloadCount += 1;
-$updateSql = $db->query("UPDATE versions SET Views='" . $downloadCount . "' WHERE Version = '" . $_GET['Version'] . "'");
 ?>
-</style>
-
-</html>
+    </div>
+</div>
