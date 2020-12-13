@@ -44,6 +44,12 @@ while($val = $sqle->fetch_assoc()) {
         
 ?>
 
+<script src="https://getinsights.io/js/insights.js"></script>
+<script>
+insights.init('QfrddlUerPUZBohw');
+insights.trackPages();
+</script>
+
 <?php
 include("navbar.php");
 

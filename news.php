@@ -10,11 +10,18 @@ $sqlfinal = $db->query($sql);
 while($val = $sqlfinal->fetch_assoc()) {
     $screenshot = $val['thumbnail'];
     $name = $val['postname'];
+    
     $desc = grabfirstsentence(file_get_contents("https://raw.githubusercontent.com/osu-archive/news/main/" . $val['bname'] . ".md"));
 }
 
 
 ?>
+
+<script src="https://getinsights.io/js/insights.js"></script>
+<script>
+insights.init('QfrddlUerPUZBohw');
+insights.trackPages();
+</script>
 
 <?php
 include("navbar.php");

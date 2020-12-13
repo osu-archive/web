@@ -11,13 +11,24 @@ while($val = $sqlfinal->fetch_assoc()) {
     $screenshots = grabshots($val); 
     $screenshot = $screenshots[0];
     $en = $val;
+    $viewCount = $val['Views'];
     $desc = grabfirstsentence($val['VersionInfo']);
 }
 
 
 ?>
 
+<script src="https://getinsights.io/js/insights.js"></script>
+<script>
+insights.init('QfrddlUerPUZBohw');
+insights.trackPages();
+</script>
 
+<?php
+$viewCount = $viewCount + 1;
+ 
+$updateSql = $db->query("UPDATE versions SET `Views` = " . $viewCount . " WHERE `Version` = '" . htmlspecialchars(addslashes($_GET['v'])) . "'");
+?>
 
 <?php
 include("navbar.php");
@@ -128,3 +139,4 @@ $usewarning = false;
 ?>
     </div>
 </div>
+
