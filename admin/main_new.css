@@ -1,0 +1,131 @@
+@font-face {
+    font-family: 'Torus';
+    src: url('../fonts/Torus-TorusSemiBold.woff2') format('woff2'), url('fonts/Torus-TorusSemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Torus';
+    src: url('../fonts/Torus-TorusThin.woff2') format('woff2'), url('fonts/Torus-TorusThin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Torus';
+    src: url('../fonts/Torus-TorusBold.woff2') format('woff2'), url('fonts/Torus-TorusBold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Torus';
+    src: url('../fonts/Torus-TorusLight.woff2') format('woff2'), url('fonts/Torus-TorusLight.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Torus';
+    src: url('../fonts/Torus-TorusRegular.woff2') format('woff2'), url('fonts/Torus-TorusRegular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: "Torus";
+    --accent: #009bda;
+    --accentless: #009bdadd;
+    --accenttrans: #009bda77;
+    box-sizing: border-box;
+}
+
+.content{
+    background-color: #000d10;
+    height: 100%;
+}
+
+.centered-login-panel{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    justify-items: center;
+    flex-direction: column;
+}
+
+.clp-logo{
+    filter: brightness(500) contrast(0) brightness(69);
+    height: 50px;
+}
+.clpl-subtitle{
+    margin-top: 10px;
+    color: white;
+}
+
+.panel{
+    background-color: #fff1;
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    margin-top: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.button-container{
+    background-color: #fff1;
+    border-radius: 14px;
+    padding: 14px;
+    color: white;
+    display: flex;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.button-container:hover{
+    background-color: #fff2;
+}
+
+
+.bt{
+
+}
+
+.apdb{
+    margin-top: 12px;
+}
+
+.clpl-subtitle{
+    font-size: 20px;
+    color: white;
+}
+
+.ap-desc{
+    font-size: 20px;
+    color: white;
+}
+
+.panel-container{
+    width: 100%;
+    padding: 00px 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.login{
+    align-items: center;
+    width: 900px;
+    text-align: center;
+}
+
+.clp-pfp{
+    height: 80px;
+    border-radius: 80px;
+}
