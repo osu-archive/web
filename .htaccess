@@ -1,3 +1,17 @@
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^/?version/(.*?)/?$ /info.php?v=$1 [L]
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /info\.php\?v=([^\&\ ]+)
+RewriteRule ^/?version\.php$ /info/%1? [L,R=301]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^/?u/(.*?)/?$ /info.php?v=$1 [L]
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /info\.php\?v=([^\&\ ]+)
+RewriteRule ^/?u\.php$ /u/%1? [L,R=301]
+
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]

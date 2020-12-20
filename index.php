@@ -164,7 +164,7 @@ include("navbar.php");
                         </div>
                     </div>
                     <div class="download-button">
-                        <a class="db-download" href="info?v=<?php echo $val['Version']; ?>">View more & Download!</a>
+                        <a class="db-download" href="version/<?php echo $val['Version']; ?>">View more & Download!</a>
                     </div>
                 </div>
             </div>

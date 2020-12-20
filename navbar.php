@@ -3,7 +3,7 @@
 </div>
 -->
 <div class="header">
-    <a class="header-top" href="./">
+    <a class="header-top" href="https://archive.osu.hubza.co.uk">
         <img src="https://upload.hubza.co.uk/i/osuarchivelogo.svg" class="ht-logo">
 </a>
     <div class="header-bottom">
