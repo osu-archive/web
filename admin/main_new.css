@@ -40,7 +40,6 @@
     --accent: #009bda;
     --accentless: #009bdadd;
     --accenttrans: #009bda77;
-    box-sizing: border-box;
 }
 
 .content{
@@ -128,4 +127,112 @@
 .clp-pfp{
     height: 80px;
     border-radius: 80px;
+}
+
+.header {
+    padding: 50px;
+    display: flex;
+    background: linear-gradient(0deg, #00cad9 0%, #18a7cb 100%);
+}
+
+.ht-logo {
+    filter: grayscale(1) brightness(2.5);
+    height: 48px;
+}
+
+.header-bottom {
+    display: flex;
+    width: 100%;
+    padding-top: 4px;
+}
+
+.hb-text {
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+}
+
+.hb-right {
+    margin-left: auto;
+}
+
+.user-pfp{
+    height: 48px;
+    border-radius: 48px;
+}
+
+.user{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.usertext{
+    font-weight: 400;
+}
+
+.nav{
+    background-color: #005d64;
+    padding: 20px;
+    padding-left: 50px;
+}
+
+.navtext{
+    color: white;
+    font-size: 18px;
+    padding-right: 25px;
+}
+
+.nt-active{
+    font-weight: 800;
+}
+
+.panel-containerv2{
+    padding: 50px;
+    
+}
+
+.panelv2{
+    padding: 15px;
+    border-radius: 15px;
+    background-color: #fff1;
+    display: flex;
+    text-decoration: none !important;
+    margin-bottom: 15px;
+}
+
+
+
+.panelv2-button:hover{
+    background-color: #fff2;
+}
+
+.welcome{
+    color: white;
+    font-weight: 300;
+    padding-bottom: 15px;
+}
+
+.pv2button{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.pv2b-line{
+    width: 4px !important;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.pv2b-text{
+    padding: 5px;
+    padding-left: 10px;
+    font-size: 18px;
+    color: white;
+    font-weight: 600;
+    text-decoration: none !important;
+}
+
+.adminline{
+    background-color: red;
 }

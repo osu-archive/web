@@ -111,7 +111,7 @@ include("navbar.php");
                 $new = true;
             }
 
-            if($val['hidden'] == 0){
+            if($val['hidden'] == 0 and $val['Approved'] == 1){
             $found = true;
             
             $screenshots = grabshots($val); 

@@ -1,5 +1,13 @@
 <?php
 include("includes.php");
+
+session_start();
+
+if(isset($_SESSION['role'])){
+    header("Location: https://archive.osu.hubza.co.uk/auth");
+    die();
+    exit;
+}
 ?>
 
 

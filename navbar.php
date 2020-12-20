@@ -1,3 +1,7 @@
+<!-- <div class="notice" style="background-color: #ee1111; padding:10px;">
+    <p class="notice-text" style="color: white;">Work is being performed on the server, expect some blips in uptime.</p>
+</div>
+-->
 <div class="header">
     <a class="header-top" href="./">
         <img src="https://upload.hubza.co.uk/i/osuarchivelogo.svg" class="ht-logo">

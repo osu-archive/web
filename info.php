@@ -4,7 +4,12 @@ include("includes.php");
 include_once('config.php'); 
 include_once('parsedown.php'); 
 
-$sql = "SELECT * FROM versions WHERE `Version` = '" . htmlspecialchars(addslashes($_GET['v'])) . "'";
+$version = htmlspecialchars(addslashes($_GET['v']));
+if(!isset($_GET['v'])){
+    $version = htmlspecialchars(addslashes($_GET['Version']));
+}
+
+$sql = "SELECT * FROM versions WHERE `Version` = '" . $version . "'";
 
 $sqlfinal = $db->query($sql);
 while($val = $sqlfinal->fetch_assoc()) {
@@ -27,7 +32,7 @@ insights.trackPages();
 <?php
 $viewCount = $viewCount + 1;
  
-$updateSql = $db->query("UPDATE versions SET `Views` = " . $viewCount . " WHERE `Version` = '" . htmlspecialchars(addslashes($_GET['v'])) . "'");
+$updateSql = $db->query("UPDATE versions SET `Views` = " . $viewCount . " WHERE `Version` = '" . $version . "'");
 ?>
 
 <?php

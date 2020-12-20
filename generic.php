@@ -1,4 +1,8 @@
 <?php
+
+//include("error.php");
+//exit;
+
 function grabshots($val){
     $a;
     if($val['Screenshots'] == ""){
