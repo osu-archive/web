@@ -122,7 +122,7 @@ $usewarning = false;
                 <?php
                 }
                 ?>
-                <a class="vpc-download-button" href="<?php echo $val['OADL-URL']; ?>"><i class="fas fa-download"></i><p class="db">Download</p></a>
+                <a class="vpc-download-button" href="https://archive.osu.hubza.co.uk/download?v=<?php echo $val["Version"]; ?>"><i class="fas fa-download"></i><p class="db">Download</p></a>
             </div>
         </div>
         <div class="screenshots">
