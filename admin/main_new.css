@@ -42,9 +42,8 @@
     --accenttrans: #009bda77;
 }
 
-.content{
+body{
     background-color: #000d10;
-    height: 100%;
 }
 
 .centered-login-panel{
@@ -236,3 +235,68 @@
 .adminline{
     background-color: red;
 }
+
+.ver-img{
+    height: 150px;
+}
+
+.texts{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 15px;
+}
+
+.v-panel{
+    display: flex;
+    padding: 15px;
+    background-color: #fff1;
+
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.v-actions{
+    display: flex;
+}
+
+.inbut{
+    background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 100%); 
+    border-radius: 4px;
+}
+
+.v-action{
+    margin-left: 10px;
+}
+
+.v-action-first{
+    margin-left: 0px !important;
+}
+
+.texts-header{
+    display: flex;
+    align-items: center;
+}
+.th-archive,.th-accept{
+    margin-left: 15px;
+    color: white;
+    margin-top: 5px;
+    opacity: 0.8;
+}
+
+.th-name{
+    color: white;
+}
+
+.texts-middle{
+    color: white;
+}
+
+.v-actions{
+    margin-top: 10px;
+}
+
+.texts-middle{
+    margin-top: 5px;
+}
+

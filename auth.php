@@ -103,6 +103,7 @@ exit;
 //} else {
 //    header('Location: https://osekai.net/');
 //}
+}
 ?>
 
 <body>
@@ -135,6 +136,4 @@ exit;
         </div>
     </div>
 </body>
-<?php
-}
-?>
+
