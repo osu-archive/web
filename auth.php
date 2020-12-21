@@ -64,6 +64,8 @@ if (isset($_GET['code'])) {
     $_SESSION['mania'] = $userDataMania;
 }
 
+if (isset($_SESSION['id'])) {
+
 $sql = "SELECT * FROM users WHERE `osuid` = '" . $_SESSION['id'] . "'";
 
 $userexists = false;
@@ -133,3 +135,6 @@ exit;
         </div>
     </div>
 </body>
+<?php
+}
+?>

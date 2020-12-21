@@ -1,7 +1,9 @@
+
+
 <?php 
-include_once('generic.php'); 
+include('generic.php'); 
 include("includes.php");
-include_once('config.php'); 
+include('config.php'); 
 include_once('parsedown.php'); 
 
 
