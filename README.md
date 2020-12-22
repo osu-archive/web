@@ -48,3 +48,7 @@ the rest is self explanitory, after setting this up if all goes right you should
 some code is commented, though not all. feel free to make an issue or pull request for stuff
 
 **WARNING:** the font is not included in this repository, i recommend you include comfortaa from google fonts or something along the lines of that.
+
+## other licences
+
+[Parsedown](https://github.com/erusev/parsedown/blob/master/LICENSE.txt) by Emanuil Rusev (MIT)
