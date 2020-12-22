@@ -1,5 +1,3 @@
-
-
 <?php 
 include('config.php'); 
 include('generic.php'); 
@@ -184,6 +182,7 @@ include("navbar.php");
 
     </div>
     <div class="news">
+    <div class="sticky">
         <div class="v-header">
             <div class="vh-top">
                 <p class="vh-text">Top 3 uploaders</p>
@@ -246,6 +245,7 @@ include("navbar.php");
         }
 
         ?>
+        </div>
         </div>
     </div>
     <?php

@@ -90,21 +90,30 @@ body {
 
 .home {
     display: flex;
-    align-items: stretch;
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    /* align items in Main Axis */
     align-items: stretch;
-    /* align items in Cross Axis */
-    align-content: stretch;
-    /* Extra space in Cross Axis */
+    flex-direction: row;
+    flex: 1;
 }
 
 .versions,
 .news {
     padding: 50px;
 }
+
+.news{
+    padding: 0px;
+    flex-grow: 1;
+}
+
+.sticky{
+    position: sticky !important;
+    display: sticky;
+    padding: 50px;
+    top: 0;
+    padding-top: 40px;
+}
+
 
 .page-divider {
     width: 5px;
