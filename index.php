@@ -8,36 +8,38 @@ include_once('parsedown.php');
 $search = $_GET['search'];
 
 if($search == ""){
-    $sql = "SELECT * FROM versions ORDER BY ReleaseDate DESC";
+    $sql = "SELECT * FROM versions ORDER BY ReleaseDate DESC"; // default sql for getting versions
 }else{
     $queryinput = "%" . htmlspecialchars(addslashes($search)) . "%";
     $sql = "SELECT * FROM versions WHERE Name LIKE '" . $queryinput . "' OR Archiver LIKE '" . $queryinput . "' OR VersionInfo LIKE '" . $queryinput . "' OR Version LIKE '" . $queryinput . "'";
+    // sql for searching, we search the name, archiver, versioninfo, and version
     
     $sql .= "ORDER BY ReleaseDate DESC";
+    // seperate ordering, in the future we'll have a dropdown for how to order
 }
 
-$sqlnews = "SELECT * FROM news ORDER BY date DESC";
-$news = $db->query($sqlnews);
+$sqlnews = "SELECT * FROM news ORDER BY date DESC"; // grab the news
+$news = $db->query($sqlnews); // gonna run that
 
 $t3sql = "SELECT COUNT(ID) AS SubmittedVersions, Archiver, ArchiverID, ArchiverURL
 FROM versions
 GROUP BY Archiver, ArchiverID
 ORDER BY COUNT(ID) DESC
-LIMIT 3"; // sql by mulraf
+LIMIT 3"; // sql by mulraf to get the top 3
 
-$t3 = $db->query($t3sql);
+$t3 = $db->query($t3sql); // gonna run that too
 
-$sqllatest = "SELECT * FROM versions ORDER BY DateAdded DESC LIMIT 1";
-$sqllateste = $db->query($sqllatest);
+$sqllatest = "SELECT * FROM versions ORDER BY DateAdded DESC LIMIT 1"; // get the newest version for meta thumbnail
+$sqllateste = $db->query($sqllatest); // run that
 while($val = $sqllateste->fetch_assoc()) {
-    $screenshots = grabshots($val); 
-    $screenshot = $screenshots[0];
+    $screenshots = grabshots($val); // get the screenshots
+    $screenshot = $screenshots[0]; // get the first one
 }
 
-$versions = 0;
-$sqle = $db->query($sql);
-while($val = $sqle->fetch_assoc()) {
-    $versions += 1;
+$versions = 0; // version counter
+$sqle = $db->query($sql); // run the version sql
+while($val = $sqle->fetch_assoc()) { 
+    $versions += 1; // count up
     
 }
 
@@ -46,7 +48,7 @@ while($val = $sqle->fetch_assoc()) {
 
 <script src="https://getinsights.io/js/insights.js"></script>
 <script>
-insights.init('QfrddlUerPUZBohw');
+insights.init('QfrddlUerPUZBohw'); // this is analytics, don't touch
 insights.trackPages();
 </script>
 
@@ -110,19 +112,24 @@ include("navbar.php");
             }else{
                 $new = true;
             }
+            // if the version was added in the last 2 days we're going to make it display a "New" box
 
+            // gonna make sure the version is approved and isn't hidden
             if($val['hidden'] == 0 and $val['Approved'] == 1){
-            $found = true;
+            $found = true; // setting this to true, if this stays false we know the search query doesnt have results
             
-            $screenshots = grabshots($val); 
-            $desc = $val['VersionInfoShort'];
+            $screenshots = grabshots($val); // get screnenshots
+            $desc = $val['VersionInfoShort']; // get short description
             if($desc == ""){
+                // if short description doesn't exist we're gonna get the first sentence of VersionInfo
+                // then we'll run it through Parsedown so we can use italics n' stuff
                 $desc = Parsedown::instance()->text(grabfirstsentence($val['VersionInfo']));
             }else{
+                // else just run the short description through parsedown
                 $desc = Parsedown::instance()->text($desc); 
             }
             if($desc == ""){
-                $desc = "<p>No description found.</p>";
+                $desc = "<p>No description found.</p>"; // fill description if there is none
             }
         ?>
             <div class="version">
@@ -173,7 +180,7 @@ include("navbar.php");
     }
 
     if($found == false){
-        echo "No results found. Try a different search query.";
+        echo "No results found. Try a different search query."; // the search query didnt work or the sql went horribly wrong
     }
         ?>
         </div>
@@ -193,8 +200,10 @@ include("navbar.php");
         </div>
         <div class="top3up-content">
             <?php 
-            $count = 0;
+            $count = 0; 
         while($val = $t3->fetch_assoc()) {
+
+            // no clue about this area
             $count += 1;
 
             $pfpurl = "";
