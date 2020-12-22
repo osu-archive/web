@@ -51,4 +51,4 @@ some code is commented, though not all. feel free to make an issue or pull reque
 
 ## other licences
 
-[Parsedown](https://github.com/erusev/parsedown/blob/master/LICENSE.txt) by Emanuil Rusev (MIT)
+[Parsedown](https://github.com/erusev/parsedown/blob/master/LICENSE.txt) by Emanuil Rusev (MIT Licence)
