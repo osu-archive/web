@@ -41,7 +41,7 @@ if (!$db) {
 ```
 the discord webhook is for logging page visits, it shows the first two or three digits of the visitor's ip. **this is optional.**
 
-the client secret is used for the osu! oauth system for the admin panel. this isn't required. i won't be explaining admin panel setup here. **this is optional.*
+the client secret is used for the osu! oauth system for the admin panel. this isn't required. i won't be explaining admin panel setup here. **this is optional.**
 
 the rest is self explanitory, after setting this up if all goes right you should have a functional version of the osu!archive website
 
