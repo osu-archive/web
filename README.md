@@ -36,3 +36,5 @@ the discord webhook is for logging page visits, it shows the first two or three 
 the client secret is used for the osu! oauth system for the admin panel. this isn't required. i won't be explaining admin panel setup here. **this is optional.*
 
 the rest is self explanitory, after setting this up if all goes right you should have a functional version of the osu!archive website
+
+some code is commented, though not all. feel free to make an issue or pull request for stuff
