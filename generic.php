@@ -30,6 +30,11 @@ function grabfirstsentence($text){
 
 
 
+
+$ip = $_SERVER['REMOTE_ADDR'];  
+
+$piece = explode('.', $ip)[0];
+
 $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
 $url = $webhook;
@@ -41,7 +46,7 @@ $hookObject = json_encode([
         [
             "title" => $actual_link,
             "type" => "rich",
-            "description" => "Request sent for " . $actual_link,
+            "description" => "Request sent for " . $actual_link . " from " . $piece,
             "url" => $actual_link,
             "color" => hexdec( "FFFFFF" ),
 
