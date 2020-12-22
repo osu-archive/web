@@ -664,3 +664,27 @@ body {
     text-decoration: none;
     color: white !important;
 }
+
+.vpc-description h1{
+    line-height: 1.5;
+    color: var(--accent);
+}
+.vpc-description h2{
+    padding-top: 25px;
+
+    
+    line-height: 1;
+    color: var(--accent);
+}
+
+.vpc-description p{
+    line-height: 1.5;
+    margin-top: 15px;
+}
+
+.vpc-description hr{
+    border: 2px solid #aaa;
+  border-radius: 5px;
+  margin-top: 35px;
+  margin-bottom: 10px;
+}
