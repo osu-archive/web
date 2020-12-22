@@ -1,7 +1,7 @@
 <?php 
+include_once('config.php'); 
 include_once('generic.php'); 
 include("includes.php");
-include_once('config.php'); 
 include_once('parsedown.php'); 
 
 $version = htmlspecialchars(addslashes($_GET['v']));
