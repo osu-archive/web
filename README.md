@@ -5,7 +5,15 @@ osu!archive is an osu! archival site, though the code could possibly be used for
 
 ## setup
 
-clone the php anywhere, it doesn't really matter where. you'll need to setup a database using this [template sql](https://archive.osu.hubza.co.uk/upload/c0osuarchive_template.sql). i won't explain how to do this, but if you're trying to use this code you should know how to anyway.
+requirements:
+- php7, but preferably php8
+- mysql-server
+- mysqli
+- [admin panel] curl
+
+clone the php anywhere, if you have git installed you can just run `git clone https://github.com/osu-archive/web`. make sure to clone it somewhere where your web server can access
+
+you'll need to setup a database using this [template sql](https://archive.osu.hubza.co.uk/upload/c0osuarchive_template.sql). i won't explain how to do this, but if you're trying to use this code you should know how to anyway.
 
 edit config.php and paste this in
 ```php
