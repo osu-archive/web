@@ -300,3 +300,36 @@ body{
     margin-top: 5px;
 }
 
+.addversion-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.av-title{
+    color: white;
+    font-size: 20px;
+}
+
+input{
+    padding: 10px;
+    border-radius: 10px;
+    border: 0px solid #0000;
+    background-color: #fff1;
+    color: white !important;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.checkbox{
+    align-self: flex-start;
+    transform: scale(1.1) translateY(2px);
+    margin-left: 10px;
+}
+
+.checkboxbox{
+    display: flex;
+    align-items: flex-start;
+}
+.av-admin{
+    color: red;
+}
