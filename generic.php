@@ -7,7 +7,7 @@ function exceptions_error_handler($severity, $message, $filename, $lineno) {
     }else{
         echo "background-color: red;'";
     }
-    echo ">" . $message . "</div>";
+    echo "><p><i class='fas fa-exclamation-triangle'></i>  " . $message . "</p></div>";
 }
 
 set_error_handler('exceptions_error_handler');
