@@ -32,18 +32,78 @@ $orig_hidden = $version['hidden'];
 $orig_updates = $version['autoupdate'];
 $orig_supporter = $version['needssupporter'];
 
-$version = $_POST['version'];
-$releasedate = $_POST['releasedate'];
-$desc = $_POST['desc'];
-$descshort = $_POST['descshort'];
-$screenshots = $_POST['desc'];
-$changelog = $_POST['changelog'];
-$category = $_POST['category'];
-$oadlurl = $_POST['oadlurl'];
-$archiver = $_POST['archiver'];
-$hidden = $_POST['hidden'];
-$updates = $_POST['updates'];
-$supporter = $_POST['supporter'];
+
+if(isset($_POST['version'])){  
+    $version = $_POST['version'];
+}else{
+    $version = $orig_version;
+}
+
+if(isset($_POST['releasedate'])){  
+    $releasedate = $_POST['releasedate'];
+}else{
+    $releasedate = $orig_releasedate;
+}
+
+if(isset($_POST['desc'])){  
+    $desc = $_POST['desc'];
+}else{
+    $desc = $orig_desc;
+}
+
+if(isset($_POST['descshort'])){  
+    $descshort = $_POST['descshort'];
+}else{
+    $descshort = $orig_descshort;
+}
+
+if(isset($_POST['screenshots'])){  
+    $screenshots = $_POST['screenshots'];
+}else{
+    $screenshots = $orig_screenshots;
+}
+
+if(isset($_POST['changelog'])){  
+    $changelog = $_POST['changelog'];
+}else{
+    $changelog = $orig_changelog;
+}
+
+if(isset($_POST['category'])){  
+    $category = $_POST['category'];
+}else{
+    $category = $orig_category;
+}
+
+if(isset($_POST['screenshots'])){  
+    $oadlurl = $_POST['screenshots'];
+}else{
+    $oadlurl = $orig_oadlurl;
+}
+
+if(isset($_POST['archiver'])){  
+    $archiver = $_POST['archiver'];
+}else{
+    $archiver = $orig_archiver;
+}
+
+if(isset($_POST['hidden'])){  
+    $hidden = $_POST['hidden'];
+}else{
+    $hidden = $orig_hidden;
+}
+
+if(isset($_POST['updates'])){  
+    $updates = $_POST['updates'];
+}else{
+    $updates = $orig_updates;
+}
+
+if(isset($_POST['supporter'])){  
+    $supporter = $_POST['supporter'];
+}else{
+    $supporter = $orig_supporter;
+}
 
 
 if($_SESSION['role'] == "111"){
@@ -60,6 +120,24 @@ if($_SESSION['role'] == "111"){
     $category = $orig_category;
     $odalurl = $orig_odalurl;
     $archiver = $orig_archiver;
+}
+
+if($hidden == false){
+    $hidden = 0;
+}else{
+    $hidden = 1;
+}
+
+if($updates == false){
+    $updates = 0;
+}else{
+    $updates = 1;
+}
+
+if($supporter == false){
+    $supporter = 0;
+}else{
+    $supporter = 1;
 }
 
 if(!isset($version)){
@@ -118,39 +196,27 @@ if(!isset($archiver)){
 }
 
 if(!isset($hidden)){
-    if(isset($orig_hidden)){
-        $hidden = $orig_hidden;
-    }
+    $hidden = $orig_hidden;
 }
 
 if(!isset($updates)){
-    if(isset($orig_updates)){
-        $updates = $orig_updates;
-    }
+    $updates = $orig_updates;
 }
 
 if(!isset($supporter)){
-    if(isset($orig_supporter)){
-        $supporter = $orig_supporter;
-    }
+    $supporter = $orig_supporter;
 }
 
-if($hidden == false){
+if(!isset($hidden)){
     $hidden = 0;
-}else{
-    $hidden = 1;
 }
 
-if($updates == false){
+if(!isset($updates)){
     $updates = 0;
-}else{
-    $updates = 1;
 }
 
-if($supporter == false){
+if(!isset($supporter)){
     $supporter = 0;
-}else{
-    $supporter = 1;
 }
 
 echo "<br>version : " . $version;
