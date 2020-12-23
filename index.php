@@ -5,9 +5,14 @@ include("includes.php");
 include_once('parsedown.php'); 
 
 
-$search = $_GET['search'];
+if(isset($_GET['search'])){
+    $search = $_GET['search'];
+}else{
+    $search = "";
+}
 
 if($search == ""){
+    
     $sql = "SELECT * FROM versions ORDER BY ReleaseDate DESC"; // default sql for getting versions
 }else{
     $queryinput = "%" . htmlspecialchars(addslashes($search)) . "%";

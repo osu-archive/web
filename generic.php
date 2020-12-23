@@ -1,5 +1,17 @@
 <?php
 
+function exceptions_error_handler($severity, $message, $filename, $lineno) {
+    echo "<div style='padding: 10px;";
+    if($severity == 2){
+        echo "background-color: #ffee22;'";
+    }else{
+        echo "background-color: red;'";
+    }
+    echo ">" . $message . "</div>";
+}
+
+set_error_handler('exceptions_error_handler');
+
 //include("error.php");
 //exit;
 
