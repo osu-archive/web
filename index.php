@@ -36,10 +36,14 @@ while($val = $sqllateste->fetch_assoc()) {
     $screenshot = $screenshots[0]; // get the first one
 }
 
+
+$versionarray;
+
 $versions = 0; // version counter
 $sqle = $db->query($sql); // run the version sql
 while($val = $sqle->fetch_assoc()) { 
     $versions += 1; // count up
+    $versionarray[$versions] = $val;
     
 }
 

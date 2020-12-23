@@ -6,11 +6,14 @@
 function grabshots($val){
     $a;
     if($val['Screenshots'] == ""){
+        // check if the old screenshot system is in use, if so get from there
         $a[0] = $val['Screenshot1'];
         $a[1] = $val['Screenshot2'];
         $a[2] = $val['Screenshot3'];
         $a[3] = $val['Screenshot4'];
     }else{
+        // else extract them from the new screenshots system
+        // each screenshot is seperated by ;
         $texts = $val['Screenshots'];
         $a = explode(";", $texts);
     }
@@ -18,6 +21,7 @@ function grabshots($val){
 }
 
 function grabfirstsentence($text){
+    // gets text up until first dot
     $pos = strpos($text, '.');
        
     if($pos === false) {

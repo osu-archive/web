@@ -14,7 +14,7 @@ include("includes.php");
     <meta name="author" content="name">
     <meta name="description" content="Seems like we're having some issues">
     <meta name="keywords" content="keywords,here">
-    <link rel="stylesheet" href="https://cubey.cc/error.css" type="text/css">
+    <link rel="stylesheet" href="https://archive.osu.hubza.co.uk/error.css" type="text/css">
 </head>
 
 <body style="height: 100vh">

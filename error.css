@@ -5,7 +5,7 @@
 
 body {
     background-color: #000 !important;
-    font-family: "Quicksand" !important;
+    font-family: "Torus" !important;
     width: 100%;
 }
 
@@ -16,6 +16,7 @@ body {
     align-items: center;
     justify-content: center;
     color: white;
+    animation: 1.4s cubic-bezier(0, .23, 0, .93) 0s 1 paneload;
 }
 
 .einfo {
@@ -23,12 +24,11 @@ body {
 }
 
 @keyframes paneload {
-    0% {
-        transform: translateY(50px);
+    0%{
         opacity: 0;
     }
-    60% {
-        transform: translateY(50px);
+    50% {
+        transform: translateY(-20px);
         opacity: 0;
     }
     100% {
@@ -146,16 +146,10 @@ body {
 
 .error {
     font-size: 70px;
-    filter: drop-shadow(0 0 10px #fffa);
+    filter: drop-shadow(0 0 10px #f00a);
+    color: #f44;
 }
 
-h1 {
-    filter: drop-shadow(0 0 10px #fffa);
-}
-
-h3 {
-    filter: drop-shadow(0 0 10px #fffa);
-}
 
 .try {
     background-color: white;
