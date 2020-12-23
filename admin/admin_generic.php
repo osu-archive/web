@@ -22,9 +22,9 @@ function verpan($val){
             <a class="pv2button inbut v-action v-action-first">
                 <div class="pv2b-line">
                 </div>
-                <div class="pv2b-text">
+                <a class="pv2b-text" href="https://archive.osu.hubza.co.uk/admin/edit_version?v=' . $val['Version'] . '">
                     edit submission
-                </div>
+                </a>
             </a>
             <a class="pv2button inbut v-action">
                 <div class="pv2b-line">

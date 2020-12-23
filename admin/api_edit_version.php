@@ -105,7 +105,6 @@ if(isset($_POST['supporter'])){
     $supporter = $orig_supporter;
 }
 
-
 if($_SESSION['role'] == "111"){
 	echo "is admin";
 }else{
@@ -233,7 +232,7 @@ echo "<br>updates : " . $updates;
 echo "<br>supporter : " . $supporter;   
 
 $id = htmlspecialchars(addslashes($_POST['id']));
-$stmt = $db->prepare("UPDATE versions SET 'Version' = ?, 'ReleaseDate' = ?, 'VersionInfo' = ?, 'VersionInfoShort' = ?, 'Screenshots' = ?, 'Changelog' = ?, 'category' = ?, 'OADL-URL' = ?, 'Archiver' = ?, 'hidden' = ?, 'autoupdate' = ?, 'needssupporter' = ? WHERE 'ID' = ?");
+$stmt = $db->prepare("UPDATE versions SET `Version` = ?, `ReleaseDate` = ?, `VersionInfo` = ?, `VersionInfoShort` = ?, `Screenshots` = ?, `Changelog` = ?, `category` = ?, `OADL-URL` = ?, `Archiver` = ?, `hidden` = ?, `autoupdate` = ?, `needssupporter` = ? WHERE `ID` = ?");
 $a = intval($hidden);
 $b = intval($updates);
 $c = intval($supporter);

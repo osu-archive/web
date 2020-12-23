@@ -24,7 +24,7 @@ if(!isset($_SESSION['role'])){
         <div class="panel-containerv2">
             <h1 class="welcome">welcome back, <strong
                     style="font-weight: 800;"><?php echo $_SESSION['username']; ?></strong></h1>
-            <a class="panelv2 panelv2-button" href="test">
+            <a class="panelv2 panelv2-button" href="your_versions">
                 <div class="pv2button">
                     <div class="pv2b-line">
                     </div>
@@ -34,7 +34,7 @@ if(!isset($_SESSION['role'])){
                 </div>
             </a>
             <?php if($_SESSION['role'] == 111){ ?>
-                <a class="panelv2 panelv2-button" href="test">
+                <a class="panelv2 panelv2-button" href="all_versions">
                 <div class="pv2button">
                     <div class="pv2b-line adminline">
                     </div>
