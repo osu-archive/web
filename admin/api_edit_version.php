@@ -135,21 +135,39 @@ if(!isset($supporter)){
     }
 }
 
-echo "version : " . $version;
-echo "releasedate : " . $releasedate;
-echo "desc : " . $desc;
-echo "descshort : " . $descshort;
-echo "screenshots : " . $screenshots;
-echo "changelog : " . $changelog;
-echo "category : " . $category;
-echo "oadlurl : " . $oadlurl;
-echo "archiver : " . $archiver;
-echo "hidden : " . $hidden;
-echo "updates : " . $updates;
-echo "supporter : " . $supporter;   
+if($hidden == false){
+    $hidden = 0;
+}else{
+    $hidden = 1;
+}
+
+if($updates == false){
+    $updates = 0;
+}else{
+    $updates = 1;
+}
+
+if($supporter == false){
+    $supporter = 0;
+}else{
+    $supporter = 1;
+}
+
+echo "<br>version : " . $version;
+echo "<br>releasedate : " . $releasedate;
+echo "<br>desc : " . $desc;
+echo "<br>descshort : " . $descshort;
+echo "<br>screenshots : " . $screenshots;
+echo "<br>changelog : " . $changelog;
+echo "<br>category : " . $category;
+echo "<br>oadlurl : " . $oadlurl;
+echo "<br>archiver : " . $archiver;
+echo "<br>hidden : " . $hidden;
+echo "<br>updates : " . $updates;
+echo "<br>supporter : " . $supporter;   
 
 $id = htmlspecialchars(addslashes($_POST['id']));
-$stmt = $db->prepare("UPDATE `versions` SET 'Version' = ?, 'ReleaseDate' = ?, 'VersionInfo' = ?, 'VersionInfoShort' = ?, 'Screenshots' = ?, 'Changelog' = ?, 'category' = ?, 'OADL-URL' = ?, 'Archiver' = ?, 'hidden' = ?, 'autoupdate' = ?, 'needssupporter' = ? WHERE 'ID' = ?");
+$stmt = $db->prepare("UPDATE versions SET 'Version' = ?, 'ReleaseDate' = ?, 'VersionInfo' = ?, 'VersionInfoShort' = ?, 'Screenshots' = ?, 'Changelog' = ?, 'category' = ?, 'OADL-URL' = ?, 'Archiver' = ?, 'hidden' = ?, 'autoupdate' = ?, 'needssupporter' = ? WHERE 'ID' = ?");
 $a = intval($hidden);
 $b = intval($updates);
 $c = intval($supporter);
