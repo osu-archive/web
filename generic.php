@@ -2,7 +2,7 @@
 
 function exceptions_error_handler($severity, $message, $filename, $lineno) {
     echo "<div style='padding: 10px;";
-    if($severity == 2){
+    if($severity == 16 || $severity == 32 || severity = 64){
         echo "background-color: #ffee22;'";
     }else{
         echo "background-color: red;'";
