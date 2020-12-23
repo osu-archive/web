@@ -64,6 +64,7 @@ include("navbar.php");
     <meta property="twitter:image" content="<?php echo $screenshot; ?>">
 
     <meta name="viewport" content="width=device-width, initial-scale=0.6 ">
+    <meta name="keywords" content="osu, old, version, osugame, archive, archival, hubz, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020">
 </head>
 
 <div class="page panel">

@@ -16,7 +16,6 @@ set_error_handler('exceptions_error_handler');
 //exit;
 
 function grabshots($val){
-    $a;
     if($val['Screenshots'] == ""){
         // check if the old screenshot system is in use, if so get from there
         $a[0] = $val['Screenshot1'];
