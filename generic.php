@@ -2,16 +2,15 @@
 
 function exceptions_error_handler($severity, $message, $filename, $lineno) {
     echo "<div style='padding: 10px;";
-    if($severity == 16 || $severity== 32 || $severity =64){
-        echo "background-color: #ffee22;'";
-    }else{
+    if($severity == 16 || $severity== 32 || $severity == 64){
         echo "background-color: red;'";
+    }else{
+        echo "background-color: #ffee22;'";
     }
     echo "><p><i class='fas fa-exclamation-triangle'></i>  " . $message . "</p></div>";
 }
 
 set_error_handler('exceptions_error_handler');
-trigger_error("Cannot divide by zero", E_USER_ERROR);
 
 //include("error.php");
 //exit;
