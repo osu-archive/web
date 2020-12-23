@@ -148,9 +148,9 @@ echo "hidden : " . $hidden;
 echo "updates : " . $updates;
 echo "supporter : " . $supporter;   
 
-$stmt = $db->prepare("UPDATE table_name
-SET Version = ?, ReleaseDate = ?, VersionInfo = ?, VersionInfoShort = ?, Screenshots = ?, Changelog = ?, category = ?, OADL-URL = ?, Archiver = ?, hidden = ?, autoupdate = ?, needssupporter = ?
-WHERE ID = ?;");
+$stmt = $db->prepare("UPDATE `versions` SET 'Version' = ?, 'ReleaseDate' = ?, 'VersionInfo' = ?, 'VersionInfoShort' = ?, 'Screenshots' = ?, 'Changelog' = ?, 'category' = ?, 'OADL-URL' = ?, 'Archiver' = ?, 'hidden' = ?, 'autoupdate' = ?, 'needssupporter' = ? WHERE 'ID' = ?");
 $stmt->bind_param("sssssssssiiii", $version, $releasedate, $desc, $descshort, $screenshots, $changelog, $category, $oadlurl, $archiver, $hidden, $updates, $supporter, htmlspecialchars(addslashes($_POST['id'])));
 $stmt->execute();
 $stmt->close();
+
+echo "test";
