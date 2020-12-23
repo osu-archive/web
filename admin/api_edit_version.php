@@ -148,8 +148,13 @@ echo "hidden : " . $hidden;
 echo "updates : " . $updates;
 echo "supporter : " . $supporter;   
 
+$id = htmlspecialchars(addslashes($_POST['id']));
 $stmt = $db->prepare("UPDATE `versions` SET 'Version' = ?, 'ReleaseDate' = ?, 'VersionInfo' = ?, 'VersionInfoShort' = ?, 'Screenshots' = ?, 'Changelog' = ?, 'category' = ?, 'OADL-URL' = ?, 'Archiver' = ?, 'hidden' = ?, 'autoupdate' = ?, 'needssupporter' = ? WHERE 'ID' = ?");
-$stmt->bind_param("sssssssssiiii", $version, $releasedate, $desc, $descshort, $screenshots, $changelog, $category, $oadlurl, $archiver, $hidden, $updates, $supporter, htmlspecialchars(addslashes($_POST['id'])));
+$a = intval($hidden);
+$b = intval($updates);
+$c = intval($supporter);
+$d = intval($id);
+$stmt->bind_param("sssssssssiiii", $version, $releasedate, $desc, $descshort, $screenshots, $changelog, $category, $oadlurl, $archiver, $a, $b, $c, $d);
 $stmt->execute();
 $stmt->close();
 
