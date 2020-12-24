@@ -75,7 +75,6 @@ include("navbar.php");
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://archive.osu.hubza.co.uk/">
     <meta property="og:title" content="osu!archive - archiving all the osu! versions from 2007 to now! ">
     <meta property="og:description"
         content="your #1 place to get old & rare osu! versions, with an awesome Discord community and over 50 versions! ">
@@ -83,7 +82,6 @@ include("navbar.php");
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://archive.osu.hubza.co.uk/">
     <meta property="twitter:title" content="osu!archive - archiving all the osu! versions from 2007 to now! ">
     <meta property="twitter:description"
         content="your #1 place to get old & rare osu! versions, with an awesome Discord community and over 50 versions! ">
