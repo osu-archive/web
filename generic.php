@@ -76,7 +76,7 @@ $hookObject = json_encode([
 $ch = curl_init();
 
 curl_setopt_array( $ch, [
-    CURLOPT_URL => $url,
+    CURLOPT_URL => $webhook,
     CURLOPT_POST => true,
     CURLOPT_POSTFIELDS => $hookObject,
     CURLOPT_HTTPHEADER => [
