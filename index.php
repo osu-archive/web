@@ -248,7 +248,7 @@ include("navbar.php");
 
             ?>
             <div class="n-panel"
-                style="background-image: url(https://upload.hubza.co.uk/i/osu%21_vkXaXvBqzB_2020-November-20.png);">
+                style="background-image: url(<?php echo $val['thumbnail']; ?>);">
                 <div class="np-content">
                     <p class="np-by">by <?php echo $val['author']; ?></p>
                     <p class="np-title"><?php echo $val['postname']; ?></p>
