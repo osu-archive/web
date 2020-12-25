@@ -52,7 +52,10 @@ $piece = explode('.', $ip)[0];
 
 $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
-$url = $webhook;
+if(strpos($actual_link, "api") == true){
+
+}else{
+
 
 $hookObject = json_encode([
     "content" => "Request sent",
@@ -83,5 +86,5 @@ curl_setopt_array( $ch, [
 
 $response = curl_exec( $ch );
 curl_close( $ch );
-
+    }
 ?>
