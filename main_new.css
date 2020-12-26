@@ -665,6 +665,16 @@ body {
     padding-right: 50px;
 }
 
+.wip-warning{
+    padding: 15px;
+    padding-left: 50px;
+    color: white;
+    display: flex;
+    background-color: #f00c;
+    padding-right: 50px;
+}
+
+
 .fc-left{
     margin-left: auto;
 }
