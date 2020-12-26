@@ -7,8 +7,8 @@ $line = $f_contents[rand(0, count($f_contents) - 1)];
 </div>
 -->
 <div class="header">
-    <a class="header-top" href="https://archive.osu.hubza.co.uk">
-        <img src="https://upload.hubza.co.uk/i/osuarchivelogo.svg" class="ht-logo">
+    <a class="header-top" href="https://<?php echo $_SERVER['SERVER_NAME']; ?>">
+        <img src="https://<?php echo $_SERVER['SERVER_NAME']; ?>/img/logo.svg" class="ht-logo">
 </a>
     <div class="header-bottom">
         <p class="hb-text"><?php echo $line; ?></hb>

@@ -225,7 +225,7 @@ include("navbar.php");
 
 
             <div class="tu-user">
-                <img src="<?php echo $pfpurl; ?>" class="tuu-pfp">
+                <img src="img/usr/<?php echo $val['Archiver']; ?>.jpg" class="tuu-pfp">
                 <p class="tuu-username"><?php echo $val['Archiver']; ?></p>
                 <p class="tuu-rank">#<?php echo $count; ?> with <?php echo $val['SubmittedVersions'] ?> versions.</p>
             </div>
