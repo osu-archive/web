@@ -168,17 +168,22 @@ if(isset($_POST['supporter'])){
 if($_SESSION['role'] == "111"){
 	echo "is admin";
 }else{
-	if($version['Archiver'] == $_SESSION['username']){
-		echo "is their version";
-	}else{
-		header("Location: https://archive.osu.hubza.co.uk/error?error=You shouldn't be there.");
-    die();
-    exit;
+    if(!isset($ext)){
+	    if($version['Archiver'] == $_SESSION['username']){
+	    	echo "is their version";
+	    }else{
+	    	header("Location: https://archive.osu.hubza.co.uk/error?error=You shouldn't be there.");
+        die();
+        exit;
+        }
     }
     $hidden = $orig_hidden;
     $category = $orig_category;
     $odalurl = $orig_odalurl;
     $archiver = $orig_archiver;
+    if(isset($ext)){
+        $archiver = $_SESSION['username'];
+    }
 }
 
 if($hidden == false){
@@ -282,6 +287,16 @@ if(isset($ext)){
     $oadlurl = "https://archive.osu.hubza.co.uk/upload/" . $version . "." . $ext;
 }
 
+$version = htmlspecialchars($version);
+$releasedate = htmlspecialchars($releasedate);
+$desc = htmlspecialchars($desc);
+$descshort = htmlspecialchars($descshort);
+$screenshots = htmlspecialchars($screenshots);
+$changelog = htmlspecialchars($changelog);
+$category = htmlspecialchars($category);
+$updates = htmlspecialchars($updates);
+$supporter = htmlspecialchars($supporter);
+
 echo "<br>version : " . $version;
 echo "<br>releasedate : " . $releasedate;
 echo "<br>desc : " . $desc;
@@ -294,6 +309,11 @@ echo "<br>archiver : " . $archiver;
 echo "<br>hidden : " . $hidden;
 echo "<br>updates : " . $updates;
 echo "<br>supporter : " . $supporter;   
+
+if(!strpos($screenshots, "https://")){
+    echo "Aborted due to missing screenshots.";
+    exit;  
+}
 
 
 $stmt = $db->prepare("UPDATE versions SET `Version` = ?, `ReleaseDate` = ?, `VersionInfo` = ?, `VersionInfoShort` = ?, `Screenshots` = ?, `Changelog` = ?, `category` = ?, `OADL-URL` = ?, `Archiver` = ?, `hidden` = ?, `autoupdate` = ?, `needssupporter` = ? WHERE `ID` = ?");
@@ -311,7 +331,10 @@ if(isset($ext)){
     $stmt2->bind_param("si", $y , $d);
     $stmt2->execute();
     $stmt2->close();
-
+    if($_SESSION['role'] == "111"){
+        $accept = "UPDATE versions SET `approved` = 1 WHERE `ID` = " . htmlspecialchars(addslashes($id));
+        $accepted = $db->query($accept);
+    }
 }
 
 echo "test";
