@@ -15,6 +15,7 @@ if(!isset($_SESSION['role'])){
 }
 
 
+
 if(isset($_FILES['fileToUpload'])){
     $path = $_FILES['fileToUpload']['name'];
 
@@ -53,6 +54,7 @@ if(isset($_FILES['fileToUpload'])){
         echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
       } else {
         echo "Sorry, there was an error uploading your file.";
+        exit;
       }
 
       $addsql = "INSERT INTO `versions` (`ID`, `ReleaseDate`, `Name`, `Archiver`, `ArchiverURL`, `VersionInfo`, `VersionInfoShort`, `GDDL-URL`, `OADL-URL`, `Screenshots`, `VersionComment`, `Version`, `Changelog`, `Views`, `Downloads`, `hidden`, `category`, `DateAdded`, `autoupdate`, `needssupporter`, `thumbnail`, `allowscomments`, `ArchiverID`, `Screenshot1`, `Screenshot2`, `Screenshot3`, `Screenshot4`, `Approved`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, current_timestamp(), NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);";
@@ -64,6 +66,11 @@ if(isset($_FILES['fileToUpload'])){
     $sql = "SELECT * FROM versions ORDER BY DateAdded DESC LIMIT 1";
 }
 else{
+    if($_SESSION['role'] == "1"){
+        header("Location: https://archive.osu.hubza.co.uk/error?error=You shouldn't be there.");
+        die();
+        exit;
+    }
     $id = htmlspecialchars(addslashes($_POST['id']));
     $sql = "SELECT * FROM versions WHERE `ID` = '" . $id . "'";
 }
@@ -310,11 +317,8 @@ echo "<br>hidden : " . $hidden;
 echo "<br>updates : " . $updates;
 echo "<br>supporter : " . $supporter;   
 
-if(!strpos($screenshots, "https://")){
-    echo "Aborted due to missing screenshots.";
-    exit;  
-}
 
+$screenshots = str_replace(" ", ";", $screenshots);
 
 $stmt = $db->prepare("UPDATE versions SET `Version` = ?, `ReleaseDate` = ?, `VersionInfo` = ?, `VersionInfoShort` = ?, `Screenshots` = ?, `Changelog` = ?, `category` = ?, `OADL-URL` = ?, `Archiver` = ?, `hidden` = ?, `autoupdate` = ?, `needssupporter` = ? WHERE `ID` = ?");
 $a = intval($hidden);
