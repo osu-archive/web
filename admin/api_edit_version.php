@@ -1,7 +1,10 @@
 <?php
+echo "test";
+
 include("admin_generic.php");
 include("../config.php");
 include("../generic.php");
+
 
 session_start();
 
@@ -12,11 +15,68 @@ if(!isset($_SESSION['role'])){
 }
 
 
-$sql = "SELECT * FROM versions WHERE `ID` = '" . htmlspecialchars(addslashes($_POST['id'])) . "'";
+if(isset($_FILES['fileToUpload'])){
+    $path = $_FILES['fileToUpload']['name'];
+
+    echo $_FILES['fileToUpload']['error'];
+
+    $ext = pathinfo($path, PATHINFO_EXTENSION);
+    $good;
+    if($ext == "7z"){
+        $good = true;
+    }
+    if($ext == "zip"){
+        $good = true;
+    }
+   
+    $version_temp = "https://archive.osu.hubza.co.uk/admin/temp/" . $_POST['version'] . "." . $ext;
+    echo $version_temp;
+
+    $version_final = "https://upload.hubza.co.uk/osuarchive/user/" . $_POST['version'] . "." . $ext;
+    echo $version_final;
+
+    if ($_FILES["fileToUpload"]["size"] > 100000000) {
+        $good == false;
+    } 
+    
+    if($good == false){
+        echo "your file is either too big or isn't a .zip or .7z.";
+        exit;
+    }
+
+    $target_file = "../upload/" . $_POST['version'] . "." . $ext;
+    echo $target_file;
+
+    print_r($_FILES);
+
+    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+        echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+      } else {
+        echo "Sorry, there was an error uploading your file.";
+      }
+
+      $addsql = "INSERT INTO `versions` (`ID`, `ReleaseDate`, `Name`, `Archiver`, `ArchiverURL`, `VersionInfo`, `VersionInfoShort`, `GDDL-URL`, `OADL-URL`, `Screenshots`, `VersionComment`, `Version`, `Changelog`, `Views`, `Downloads`, `hidden`, `category`, `DateAdded`, `autoupdate`, `needssupporter`, `thumbnail`, `allowscomments`, `ArchiverID`, `Screenshot1`, `Screenshot2`, `Screenshot3`, `Screenshot4`, `Approved`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, current_timestamp(), NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);";
+
+
+
+    $asqlf = $db->query($addsql);
+      
+    $sql = "SELECT * FROM versions ORDER BY DateAdded DESC LIMIT 1";
+}
+else{
+    $id = htmlspecialchars(addslashes($_POST['id']));
+    $sql = "SELECT * FROM versions WHERE `ID` = '" . $id . "'";
+}
+
+
+
 
 $sqlfinal = $db->query($sql);
 while($val = $sqlfinal->fetch_assoc()) {
     $version = $val;
+    if(isset($ext)){
+        $id = $val['ID'];
+    }
 }
 
 $orig_version = $version['Version'];
@@ -218,6 +278,10 @@ if(!isset($supporter)){
     $supporter = 0;
 }
 
+if(isset($ext)){
+    $oadlurl = "https://archive.osu.hubza.co.uk/upload/" . $version . "." . $ext;
+}
+
 echo "<br>version : " . $version;
 echo "<br>releasedate : " . $releasedate;
 echo "<br>desc : " . $desc;
@@ -231,7 +295,7 @@ echo "<br>hidden : " . $hidden;
 echo "<br>updates : " . $updates;
 echo "<br>supporter : " . $supporter;   
 
-$id = htmlspecialchars(addslashes($_POST['id']));
+
 $stmt = $db->prepare("UPDATE versions SET `Version` = ?, `ReleaseDate` = ?, `VersionInfo` = ?, `VersionInfoShort` = ?, `Screenshots` = ?, `Changelog` = ?, `category` = ?, `OADL-URL` = ?, `Archiver` = ?, `hidden` = ?, `autoupdate` = ?, `needssupporter` = ? WHERE `ID` = ?");
 $a = intval($hidden);
 $b = intval($updates);
@@ -240,5 +304,14 @@ $d = intval($id);
 $stmt->bind_param("sssssssssiiii", $version, $releasedate, $desc, $descshort, $screenshots, $changelog, $category, $oadlurl, $archiver, $a, $b, $c, $d);
 $stmt->execute();
 $stmt->close();
+
+if(isset($ext)){
+    $stmt2 = $db->prepare("UPDATE versions SET `Name` = ? WHERE `ID` = ?");
+    $y = "osu!" . date('Y', strtotime($releasedate));
+    $stmt2->bind_param("si", $y , $d);
+    $stmt2->execute();
+    $stmt2->close();
+
+}
 
 echo "test";

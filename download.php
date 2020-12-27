@@ -9,6 +9,9 @@ if(!empty($_GET['v'])){
     $sqlfinal = $db->query($sql);
     while($val = $sqlfinal->fetch_assoc()) {
         $file = $val['OADL-URL'];
+        if($file == ""){
+            $file = $val['GDDL-URL'];
+        }
         $downloads = $val['Downloads'];
     }
 
