@@ -1,6 +1,7 @@
 <?php
 $f_contents = file("splash.txt"); 
 $line = $f_contents[rand(0, count($f_contents) - 1)];
+//$line = "Happy new year!";
 ?>
 <!-- <div class="notice" style="background-color: #ee1111; padding:10px;">
     <p class="notice-text" style="color: white;">Work is being performed on the server, expect some blips in uptime.</p>

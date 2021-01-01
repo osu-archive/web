@@ -21,6 +21,7 @@ if(!empty($_GET['v'])){
     $sql2 = $db->query($sqldownloads);
     
     exit(header("Location: " . $file));
+    echo "Could not redirect. Please go to " . $file;
 }else{
     exit(header("Location: ./index.php"));
 }
