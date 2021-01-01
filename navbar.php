@@ -3,10 +3,10 @@ $f_contents = file("splash.txt");
 $line = $f_contents[rand(0, count($f_contents) - 1)];
 //$line = "Happy new year!";
 ?>
-<!-- <div class="notice" style="background-color: #ee1111; padding:10px;">
-    <p class="notice-text" style="color: white;">Work is being performed on the server, expect some blips in uptime.</p>
+<div class="notice" style="background-color: #ee1111; padding:10px;">
+    <p class="notice-text" style="color: white;"><i class="fas fa-exclamation-triangle"></i> Work is being performed on one of the servers we depend on, some screenshots and downloads could be non-functional.</p>
 </div>
--->
+
 <div class="header">
     <a class="header-top" href="https://<?php echo $_SERVER['SERVER_NAME']; ?>">
         <img src="https://<?php echo $_SERVER['SERVER_NAME']; ?>/img/logo.svg" class="ht-logo">

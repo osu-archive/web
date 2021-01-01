@@ -30,7 +30,13 @@ include("includes.php");
             echo "This could usually happen when the website is under maintenance, or an error has occured.";
         }
         ?>
+        <?php
+        if(!isset($_GET["error"])){
+            ?>
                 <br><input class="try" type="button" value="Try Again" onclick="location.reload(); " />
+                <?php
+        }
+                ?>
             </h3>
         </div>
         <div class="info">

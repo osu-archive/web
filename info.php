@@ -15,6 +15,9 @@ $sqlfinal = $db->query($sql);
 while($val = $sqlfinal->fetch_assoc()) {
     $screenshots = grabshots($val); 
     $screenshot = $screenshots[0];
+    if(!checkOnline($screenshot)){
+        $screenshot = "https://archive.osu.hubza.co.uk/img/screenshot_error.png";
+    }
     $en = $val;
     $viewCount = $val['Views'];
     $desc = grabfirstsentence($val['VersionInfo']);
@@ -135,7 +138,7 @@ $usewarning = false;
                     <?php
                     echo $value;
                     ?>
-                    " class="ss-screenshot">
+                    " class="ss-screenshot" onerror="this.src='https://archive.osu.hubza.co.uk/img/screenshot_error.png'">
                     <?php
                 }
             ?>

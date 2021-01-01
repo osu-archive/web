@@ -141,7 +141,7 @@ include("navbar.php");
         ?>
             <div class="version">
                 <div class="image-container">
-                    <img class="version-image" src="<?php echo $screenshots[0]; ?>">
+                    <img class="version-image" src="<?php echo $screenshots[0]; ?>" onerror="this.src='https://archive.osu.hubza.co.uk/img/screenshot_error.png'">
                 </div>
                 <div class="texts">
                     <div class="ver-header">
