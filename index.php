@@ -1,9 +1,9 @@
 <?php 
+
 include('config.php'); 
 include('generic.php'); 
 include("includes.php");
 include_once('parsedown.php'); 
-
 
 if(isset($_GET['search'])){
     $search = $_GET['search'];
@@ -12,7 +12,6 @@ if(isset($_GET['search'])){
 }
 
 if($search == ""){
-    
     $sql = "SELECT * FROM versions ORDER BY ReleaseDate DESC"; // default sql for getting versions
 }else{
     $queryinput = "%" . htmlspecialchars(addslashes($search)) . "%";

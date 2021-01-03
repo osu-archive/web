@@ -1,6 +1,9 @@
 <?php
 
 function checkOnline($domain) {
+    if(strpos($domain, "mega")){
+        return true;
+    }
     $curlInit = curl_init($domain);
     curl_setopt($curlInit,CURLOPT_CONNECTTIMEOUT,10);
     curl_setopt($curlInit,CURLOPT_HEADER,true);
