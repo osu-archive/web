@@ -1,34 +1,34 @@
 @font-face {
     font-family: 'Torus';
-    src: url('../fonts/Torus-TorusSemiBold.woff2') format('woff2'), url('fonts/Torus-TorusSemiBold.woff') format('woff');
+    src: url('fonts/Torus-TorusSemiBold.woff2') format('woff2'), url('fonts/Torus-TorusSemiBold.woff') format('woff');
     font-weight: 600;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Torus';
-    src: url('../fonts/Torus-TorusThin.woff2') format('woff2'), url('fonts/Torus-TorusThin.woff') format('woff');
+    src: url('fonts/Torus-TorusThin.woff2') format('woff2'), url('fonts/Torus-TorusThin.woff') format('woff');
     font-weight: 100;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Torus';
-    src: url('../fonts/Torus-TorusBold.woff2') format('woff2'), url('fonts/Torus-TorusBold.woff') format('woff');
+    src: url('fonts/Torus-TorusBold.woff2') format('woff2'), url('fonts/Torus-TorusBold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Torus';
-    src: url('../fonts/Torus-TorusLight.woff2') format('woff2'), url('fonts/Torus-TorusLight.woff') format('woff');
+    src: url('fonts/Torus-TorusLight.woff2') format('woff2'), url('fonts/Torus-TorusLight.woff') format('woff');
     font-weight: 300;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Torus';
-    src: url('../fonts/Torus-TorusRegular.woff2') format('woff2'), url('fonts/Torus-TorusRegular.woff') format('woff');
+    src: url('fonts/Torus-TorusRegular.woff2') format('woff2'), url('fonts/Torus-TorusRegular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -36,7 +36,7 @@
 * {
     padding: 0px;
     margin: 0px;
-    font-family: "Torus", sans-serif;
+    font-family: "Torus";
     --fff: #fff;
     --accent: #009bda;
     --accentless: #009bdadd;
@@ -96,24 +96,22 @@ body {
     flex: 1;
 }
 
-.versions,
-.news {
+.versions, .news {
     padding: 50px;
 }
 
-.news{
+.news {
     padding: 0px;
     flex-grow: 1;
 }
 
-.sticky{
+.sticky {
     position: sticky !important;
     display: sticky;
     padding: 50px;
     top: 0;
     padding-top: 40px;
 }
-
 
 .page-divider {
     width: 5px;
@@ -253,8 +251,7 @@ body {
     justify-items: center;
 }
 
-.vevd-views,
-.vevd-downloads {
+.vevd-views, .vevd-downloads {
     display: flex;
     font-size: 15px !important;
     color: var(--accent) !important;
@@ -267,8 +264,7 @@ body {
     margin-bottom: 5px;
 }
 
-.vevd-download-count,
-.vevd-view-count {
+.vevd-download-count, .vevd-view-count {
     line-height: 16px;
     margin-left: 3px;
     padding-bottom: 3px;
@@ -366,9 +362,7 @@ body {
     }
 }
 
-.np-by,
-.np-title,
-.np-desc {
+.np-by, .np-title, .np-desc {
     color: var(--accent);
 }
 
@@ -414,8 +408,7 @@ body {
     border-radius: 200px;
 }
 
-.tuu-username,
-.tuu-rank {
+.tuu-username, .tuu-rank {
     color: var(--accent);
     font-size: 22px;
     margin-bottom: 3px;
@@ -534,8 +527,7 @@ body {
     margin-left: 0px;
 }
 
-.bc-views,
-.bc-downloads {
+.bc-views, .bc-downloads {
     display: flex;
     color: white;
     font-size: 18px;
@@ -545,8 +537,7 @@ body {
     align-items: center;
 }
 
-.bcv-view-count,
-.bcd-download-count {
+.bcv-view-count, .bcd-download-count {
     margin-left: 3px;
 }
 
@@ -647,7 +638,7 @@ body {
     }
 }
 
-.footer{
+.footer {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -657,7 +648,7 @@ body {
     filter: drop-shadow(0 0 10px #0005);
 }
 
-.footer-content{
+.footer-content {
     padding: 15px;
     padding-left: 50px;
     color: white;
@@ -665,7 +656,7 @@ body {
     padding-right: 50px;
 }
 
-.wip-warning{
+.wip-warning {
     padding: 15px;
     padding-left: 50px;
     color: white;
@@ -674,40 +665,38 @@ body {
     padding-right: 50px;
 }
 
-
-.fc-left{
+.fc-left {
     margin-left: auto;
 }
 
-.ft-link{
+.ft-link {
     text-decoration: none;
     color: white !important;
 }
 
-.vpc-description h1{
+.vpc-description h1 {
     line-height: 1.5;
     color: var(--accent);
 }
-.vpc-description h2{
-    padding-top: 25px;
 
-    
+.vpc-description h2 {
+    padding-top: 25px;
     line-height: 1;
     color: var(--accent);
 }
 
-.vpc-description p{
+.vpc-description p {
     line-height: 1.5;
     margin-top: 15px;
 }
 
-.vpc-description hr{
+.vpc-description hr {
     border: 2px solid #aaa;
-  border-radius: 5px;
-  margin-top: 35px;
-  margin-bottom: 10px;
+    border-radius: 5px;
+    margin-top: 35px;
+    margin-bottom: 10px;
 }
 
-.e404{
+.e404 {
     margin: 50px;
 }

@@ -1,5 +1,12 @@
 <?php
 
+$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+
+function geturl(){
+    $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+    return $actual_link;
+}
+
 function checkOnline($domain) {
     if(strpos($domain, "mega")){
         return true;
@@ -76,8 +83,6 @@ function e404($error){
 $ip = $_SERVER['REMOTE_ADDR'];  
 
 $piece = explode('.', $ip)[0];
-
-$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
 if(strpos($actual_link, "api") == true){
 
