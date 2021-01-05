@@ -55,21 +55,10 @@ if($version_exists == false){
 }
 
 
-?>
-
-<script src="https://getinsights.io/js/insights.js"></script>
-<script>
-insights.init('QfrddlUerPUZBohw');
-insights.trackPages();
-</script>
-
-<?php
 $viewCount = $viewCount + 1;
  
 $updateSql = $db->query("UPDATE versions SET `Views` = " . $viewCount . " WHERE `Version` = '" . $version . "'");
-?>
 
-<?php
 include("navbar.php");
 
 ?>
