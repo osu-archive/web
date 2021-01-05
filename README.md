@@ -1,4 +1,4 @@
-# osu!archive / web
+# [osu!archive / web](https://archive.osu.hubza.co.uk/)
 
 osu!archive is an osu! archival site, though the code could possibly be used for archiving other things
 
