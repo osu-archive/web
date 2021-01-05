@@ -1,15 +1,20 @@
 <?php 
+// this is hell, good luck
 
-include('config.php'); 
-include('generic.php'); 
-include("includes.php");
-include_once('parsedown.php'); 
+include('config.php'); // include config and stuff
+include('generic.php');  // generic, includes functions that'll help
+include("includes.php"); // css includes and stuff
+include_once('parsedown.php'); // to parse the markdown
+
+// set the $search variable
 
 if(isset($_GET['search'])){
     $search = $_GET['search'];
 }else{
     $search = "";
 }
+
+// {SECTION} : Version SQL
 
 if($search == ""){
     $sql = "SELECT * FROM versions ORDER BY ReleaseDate DESC"; // default sql for getting versions
@@ -22,8 +27,12 @@ if($search == ""){
     // seperate ordering, in the future we'll have a dropdown for how to order
 }
 
+// {SECTION} : news
+
 $sqlnews = "SELECT * FROM news ORDER BY date DESC"; // grab the news
 $news = $db->query($sqlnews); // gonna run that
+
+// {SECTION} : top 3
 
 $t3sql = "SELECT COUNT(ID) AS SubmittedVersions, Archiver, ArchiverID, ArchiverURL
 FROM versions
@@ -33,35 +42,18 @@ LIMIT 3"; // sql by mulraf to get the top 3
 
 $t3 = $db->query($t3sql); // gonna run that too
 
-$sqllatest = "SELECT * FROM versions ORDER BY DateAdded DESC LIMIT 1"; // get the newest version for meta thumbnail
-$sqllateste = $db->query($sqllatest); // run that
-while($val = $sqllateste->fetch_assoc()) {
-    $screenshots = grabshots($val); // get the screenshots
-    $screenshot = $screenshots[0]; // get the first one
-}
-
-
-$versionarray;
-
 $versions = 0; // version counter
 $sqle = $db->query($sql); // run the version sql
 while($val = $sqle->fetch_assoc()) { 
     $versions += 1; // count up
-    $versionarray[$versions] = $val;
-    
+    // if its the first version
+    if(!isset($screenshot)){
+        $screenshots = grabshots($val); // get the screenshots
+        $screenshot = $screenshots[0]; // get the first one
+    }
 }
 
-        
-?>
-
-<script src="https://getinsights.io/js/insights.js"></script>
-<script>
-insights.init('QfrddlUerPUZBohw'); // this is analytics, don't touch
-insights.trackPages();
-</script>
-
-<?php
-include("navbar.php");
+include("navbar.php"); // include navbar
 
 ?>
 
@@ -91,7 +83,6 @@ include("navbar.php");
 
 <div class="page home">
     <div class="versions">
-
         <div class="v-header">
             <div class="vh-top">
                 <p class="vh-text">Versions <span style="font-weight: 200; "><?php echo $versions?></span></p>
@@ -109,53 +100,55 @@ include("navbar.php");
 
         <div class="v-content">
             <?php
-            $found = false;
+            $found = false; // variable to see if a version was found
+
             $sqle = $db->query($sql);
-        while($val = $sqle->fetch_assoc()) {
+            while($val = $sqle->fetch_assoc()) {
 
-            if(strtotime($val['DateAdded']) < strtotime("-2 days")){
-                $new = false;
-            }else{
-                $new = true;
-            }
-            // if the version was added in the last 2 days we're going to make it display a "New" box
+                if(strtotime($val['DateAdded']) < strtotime("-2 days")){
+                    $new = false;
+                }else{
+                    $new = true;
+                }
+                // if the version was added in the last 2 days we're going to make it display a "New" box
 
-            // gonna make sure the version is approved and isn't hidden
-            if($val['hidden'] == 0 and $val['Approved'] == 1){
-            $found = true; // setting this to true, if this stays false we know the search query doesnt have results
-            
-            $screenshots = grabshots($val); // get screnenshots
-            $desc = $val['VersionInfoShort']; // get short description
-            if($desc == ""){
-                // if short description doesn't exist we're gonna get the first sentence of VersionInfo
-                // then we'll run it through Parsedown so we can use italics n' stuff
-                $desc = Parsedown::instance()->text(grabfirstsentence($val['VersionInfo']));
-            }else{
-                // else just run the short description through parsedown
-                $desc = Parsedown::instance()->text($desc); 
-            }
-            if($desc == ""){
-                $desc = "<p>No description found.</p>"; // fill description if there is none
-            }
-        ?>
+                // gonna make sure the version is approved and isn't hidden
+                if($val['hidden'] == 0 and $val['Approved'] == 1){
+                $found = true; // setting this to true, if this stays false we know the search query doesnt have results
+                
+                $screenshots = grabshots($val); // get screnenshots
+                $desc = $val['VersionInfoShort']; // get short description
+                if($desc == ""){
+                    // if short description doesn't exist we're gonna get the first sentence of VersionInfo
+                    // then we'll run it through Parsedown so we can use italics n' stuff
+                    $desc = Parsedown::instance()->text(grabfirstsentence($val['VersionInfo']));
+                }else{
+                    // else just run the short description through parsedown
+                    $desc = Parsedown::instance()->text($desc); 
+                }
+                if($desc == ""){
+                    $desc = "<p>No description found.</p>"; // fill description if there is none
+                }
+                ?>
             <div class="version">
                 <div class="image-container">
-                    <img class="version-image" src="<?php echo $screenshots[0]; ?>" onerror="this.src='https://archive.osu.hubza.co.uk/img/screenshot_error.png'">
+                    <img class="version-image" src="<?php echo $screenshots[0]; ?>"
+                        onerror="this.src='https://archive.osu.hubza.co.uk/img/screenshot_error.png'">
                 </div>
                 <div class="texts">
                     <div class="ver-header">
                         <div class="name">
                             <p class="verh-name"><?php echo $val['Version']; ?> </p>
                             <?php if($new == true){
-                            ?>
+                                ?>
 
                             <div class="new-container">
                                 New!
                             </div>
 
                             <?php
-                            }
-                            ?>
+                                }
+                                ?>
                         </div>
                         <div class="ver-arch">
                             <p class="verh-version"><?php echo date("F j, Y", strtotime($val['ReleaseDate'])); ?></p>
@@ -182,12 +175,12 @@ include("navbar.php");
                 </div>
             </div>
             <?php
+            }
         }
-    }
 
-    if($found == false){
-        echo "No results found. Try a different search query."; // the search query didnt work or the sql went horribly wrong
-    }
+        if($found == false){
+            echo "No results found. Try a different search query."; // the search query didnt work or the sql went horribly wrong
+        }
         ?>
         </div>
     </div>
@@ -195,75 +188,64 @@ include("navbar.php");
 
     </div>
     <div class="news">
-    <div class="sticky">
-        <div class="v-header">
-            <div class="vh-top">
-                <p class="vh-text">Top 3 uploaders</p>
-            </div>
-            <div class="vh-botton">
-                <p class="vh-text-small">The top archivers from the osu!archive community!</p>
-            </div>
-        </div>
-        <div class="top3up-content">
-            <?php 
-            $count = 0; 
-        while($val = $t3->fetch_assoc()) {
-
-            // no clue about this area
-            $count += 1;
-
-            $pfpurl = "";
-            $afa = "SELECT * FROM t3users WHERE username = '" . $val['Archiver'] . "'";
-            $t3u = $db->query($afa);
-            while($val2 = $t3u->fetch_assoc()){
-                $pfpurl = $val2['pfp'];
-            }
-
-
-            ?>
-
-
-            <div class="tu-user">
-                <img src="img/usr/<?php echo $val['Archiver']; ?>.jpg" class="tuu-pfp">
-                <p class="tuu-username"><?php echo $val['Archiver']; ?></p>
-                <p class="tuu-rank">#<?php echo $count; ?> with <?php echo $val['SubmittedVersions'] ?> versions.</p>
-            </div>
-            <?php
-
-        }
-        ?>
-        </div>
-        <div class="v-header">
-            <div class="vh-top">
-                <p class="vh-text">News</p>
-            </div>
-            <div class="vh-botton">
-                <p class="vh-text-small">The latest updates from the osu!archive team</p>
-            </div>
-        </div>
-        <div class="n-content">
-            <?php 
-        while($val = $news->fetch_assoc()) {
-
-            ?>
-            <div class="n-panel"
-                style="background-image: url(<?php echo $val['thumbnail']; ?>);">
-                <div class="np-content">
-                    <p class="np-by">by <?php echo $val['author']; ?></p>
-                    <p class="np-title"><?php echo $val['postname']; ?></p>
-                    <p class="np-desc"><?php echo $val['short-desc']; ?></p>
-                    <a class="np-but" href="news?post=<?php echo $val['bname']; ?>">read more</a>
+        <div class="sticky">
+            <div class="v-header">
+                <div class="vh-top">
+                    <p class="vh-text">Top 3 uploaders</p>
+                </div>
+                <div class="vh-botton">
+                    <p class="vh-text-small">The top archivers from the osu!archive community!</p>
                 </div>
             </div>
-            <?php
+            <div class="top3up-content">
+                <?php 
+            $count = 0; 
+            while($val = $t3->fetch_assoc()) {
+                // top 3 users
+                $count += 1;
 
-        }
+                $pfpurl = "";
 
-        ?>
-        </div>
+                // get user pfp
+                $afa = "SELECT * FROM t3users WHERE username = '" . $val['Archiver'] . "'";
+                $t3u = $db->query($afa);
+                while($val2 = $t3u->fetch_assoc()){
+                    $pfpurl = $val2['pfp'];
+                }
+                ?>
+
+                <div class="tu-user">
+                    <img src="img/usr/<?php echo $val['Archiver']; ?>.jpg" class="tuu-pfp">
+                    <p class="tuu-username"><?php echo $val['Archiver']; ?></p>
+                    <p class="tuu-rank">#<?php echo $count; ?> with <?php echo $val['SubmittedVersions'] ?> versions.
+                    </p>
+                </div>
+                <?php
+            } ?>
+            </div>
+            <div class="v-header">
+                <div class="vh-top">
+                    <p class="vh-text">News</p>
+                </div>
+                <div class="vh-botton">
+                    <p class="vh-text-small">The latest updates from the osu!archive team</p>
+                </div>
+            </div>
+            <div class="n-content">
+                <?php while($val = $news->fetch_assoc()) { ?>
+                <div class="n-panel" style="background-image: url(<?php echo $val['thumbnail']; ?>);">
+                    <div class="np-content">
+                        <p class="np-by">by <?php echo $val['author']; ?></p>
+                        <p class="np-title"><?php echo $val['postname']; ?></p>
+                        <p class="np-desc"><?php echo $val['short-desc']; ?></p>
+                        <a class="np-but" href="news?post=<?php echo $val['bname']; ?>">read more</a>
+                    </div>
+                </div>
+                <?php } ?>
+            </div>
         </div>
     </div>
     <?php
-    include("footer.php");
+    include("footer.php"); // footer
     ?>
 </div>
