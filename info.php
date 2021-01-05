@@ -1,18 +1,34 @@
 <?php 
-include_once('config.php'); 
-include_once('generic.php'); 
-include("includes.php");
-include_once('parsedown.php'); 
+// this is also hell, good luck
 
-$version = htmlspecialchars(addslashes($_GET['v']));
-if(!isset($_GET['v'])){
+include('config.php'); // include config and stuff
+include('generic.php');  // generic, includes functions that'll help
+include("includes.php"); // css includes and stuff
+include_once('parsedown.php'); // to parse the markdown
+
+
+// backwards compatability for old system
+if(isset($_GET['Version'])){
     $version = htmlspecialchars(addslashes($_GET['Version']));
 }
+
+if(isset($_GET['v'])){
+    $version = htmlspecialchars(addslashes($_GET['v']));
+}
+
+if(!isset($version)){
+    include("navbar.php");
+    e404("Could not find this version...");
+    exit;
+}
+
+$version_exists = false;
 
 $sql = "SELECT * FROM versions WHERE `Version` = '" . $version . "'";
 
 $sqlfinal = $db->query($sql);
 while($val = $sqlfinal->fetch_assoc()) {
+    $version_exists = true;
     $screenshots = grabshots($val); 
     $screenshot = $screenshots[0];
     if(!checkOnline($screenshot)){
@@ -26,10 +42,16 @@ while($val = $sqlfinal->fetch_assoc()) {
     $file = $val['OADL-URL'];
     
     if($file == ""){
-    
         $file = $val['GDDL-URL'];
-    
     }
+    $ver_val = $val;
+}
+
+
+if($version_exists == false){
+    include("navbar.php");
+    e404("Could not find this version...");
+    exit;
 }
 
 
@@ -84,39 +106,33 @@ include("navbar.php");
         <div class="v-header">
             <div class="vh-top">
                 <p class="vh-text"><span style="font-weight: 200; ">Versions / </span>
-                    <?php echo htmlspecialchars(addslashes($_GET['v'])); ?></p>
+                    <?php echo $ver_val["Version"]; ?></p>
             </div>
         </div>
-        <?php
-$sqlfinal = $db->query($sql);
-
-while($val = $sqlfinal->fetch_assoc()) {
-
-    ?>
         <div class="ver-panel">
             <div class="ver-panel-header" style="background-image: url(<?php echo $screenshot; ?>)">
                 <div class="blur-cont">
                     <div class="bc-left">
-                        <p class="versionname"><?php echo $val['Name']; ?> <span
-                                class="vn-thin"><?php echo $val['Version']; ?></span></p>
-                        <p class="bc-date"><?php echo date("F jS, Y", strtotime($val['ReleaseDate'])); ?></p>
-                        <p class="bc-archiver">archived by <a class="bca-name"><?php echo $val['Archiver']; ?></a></p>
+                        <p class="versionname"><?php echo $ver_val['Name']; ?> <span
+                                class="vn-thin"><?php echo $ver_val['Version']; ?></span></p>
+                        <p class="bc-date"><?php echo date("F jS, Y", strtotime($ver_val['ReleaseDate'])); ?></p>
+                        <p class="bc-archiver">archived by <a class="bca-name"><?php echo $ver_val['Archiver']; ?></a></p>
                     </div>
                     <div class="bc-right">
                         <div class="bc-views">
                             <i class="fas fa-eye"></i>
-                            <p class="bcv-view-count"><?php echo $val['Views']; ?></p>
+                            <p class="bcv-view-count"><?php echo $ver_val['Views']; ?></p>
                         </div>
                         <div class="bc-downloads">
                             <i class="fas fa-download dlb"></i>
-                            <p class="bcd-download-count"><?php echo $val['Downloads']; ?></p>
+                            <p class="bcd-download-count"><?php echo $ver_val['Downloads']; ?></p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="ver-panel-content">
                 <?php
-$usewarning = false;
+                $usewarning = false;
                 if(0 == 1){ 
                     $usewarning = true;
 
@@ -133,45 +149,34 @@ $usewarning = false;
                 <?php
                 }
                 ?>
-                <?php if($val['VersionInfo'] != ""){ ?>
+                <?php if($ver_val['VersionInfo'] != ""){ ?>
                 <p class="vpc-description <?php if($usewarning == true) { echo "vpcd-paddingtop"; } ?>">
-                    <?php echo $val['VersionInfo']; ?></p>
-                <?php
-                }
-                ?>
-                <?php 
+                    <?php echo $ver_val['VersionInfo']; ?>
+                </p>
+                <?php }
+    
                 if(checkOnline($file) == true){ ?>
-                <a class="vpc-download-button"
-                    href="https://archive.osu.hubza.co.uk/download?v=<?php echo $val["Version"]; ?>"><i
-                        class="fas fa-download"></i>
+                <a class="vpc-download-button" href="https://archive.osu.hubza.co.uk/download?v=<?php echo $ver_val["Version"]; ?>">
+                    <i class="fas fa-download"></i>
                     <p class="db">Download</p>
                 </a>
                 <?php } else { ?>
                 <div class="warning" style="filter: hue-rotate(-46deg) saturate(2);">
                     <i class="fas fa-exclamation-circle"></i>
-                    <p class="warning-text">The download for this version is currently unavailable, please check back
-                        later.</p>
+                    <p class="warning-text">The download for this version is currently unavailable, please check back later.</p>
                 </div>
                 <?php } ?>
             </div>
         </div>
         <div class="screenshots">
             <?php
-            $screenshots = grabshots($val);
-                foreach ($screenshots as $value) {
-                    ?>
-            <img src="
-                    <?php
-                    echo $value;
-                    ?>
-                    " class="ss-screenshot"
-                onerror="this.src='https://archive.osu.hubza.co.uk/img/screenshot_error.png'">
-            <?php
-                }
-            ?>
+            $screenshots = grabshots($ver_val);
+            foreach ($screenshots as $value) { ?>
+            <img src="<?php echo $value; ?>" class="ss-screenshot" onerror="this.src='https://archive.osu.hubza.co.uk/img/screenshot_error.png'">
+            <?php } ?>
         </div>
-        <?php
-}
-?>
     </div>
+    <?php
+    include("footer.php"); // footer
+    ?>
 </div>
