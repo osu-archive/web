@@ -15,16 +15,7 @@ while($val = $sqlfinal->fetch_assoc()) {
 }
 
 
-?>
-
-<script src="https://getinsights.io/js/insights.js"></script>
-<script>
-insights.init('QfrddlUerPUZBohw');
-insights.trackPages();
-</script>
-
-<?php
-include("navbar.php");
+include("obj_navbar.php");
 
 ?>
 

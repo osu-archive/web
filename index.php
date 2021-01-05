@@ -53,7 +53,7 @@ while($val = $sqle->fetch_assoc()) {
     }
 }
 
-include("navbar.php"); // include navbar
+include("obj_navbar.php"); // include navbar
 
 ?>
 
@@ -246,6 +246,6 @@ include("navbar.php"); // include navbar
         </div>
     </div>
     <?php
-    include("footer.php"); // footer
+    include("obj_footer.php"); // footer
     ?>
 </div>

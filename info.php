@@ -59,7 +59,7 @@ $viewCount = $viewCount + 1;
  
 $updateSql = $db->query("UPDATE versions SET `Views` = " . $viewCount . " WHERE `Version` = '" . $version . "'");
 
-include("navbar.php");
+include("obj_navbar.php");
 
 ?>
 
@@ -166,6 +166,6 @@ include("navbar.php");
         </div>
     </div>
     <?php
-    include("footer.php"); // footer
+    include("obj_footer.php"); // footer
     ?>
 </div>
