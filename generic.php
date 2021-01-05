@@ -64,6 +64,12 @@ function grabfirstsentence($text){
     }
 }
 
+function e404($error){
+    echo '<div class="warning e404">
+    <i class="fas fa-exclamation-circle"></i>
+    <p class="warning-text">' . $error . '</p>
+</div>';
+}
 
 
 
