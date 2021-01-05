@@ -2,7 +2,7 @@
 include_once('generic.php'); 
 include("includes.php");
 include_once('config.php'); 
-include_once('parsedown.php'); 
+include_once('addons/parsedown.php'); 
 
 $sql = "SELECT * FROM news WHERE `bname` = '" . htmlspecialchars(addslashes($_GET['post'])) . "'";
 

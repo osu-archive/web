@@ -4,7 +4,7 @@
 include('config.php'); // include config and stuff
 include('generic.php');  // generic, includes functions that'll help
 include("includes.php"); // css includes and stuff
-include_once('parsedown.php'); // to parse the markdown
+include_once('addons/parsedown.php'); // to parse the markdown
 
 
 // backwards compatability for old system

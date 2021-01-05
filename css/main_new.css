@@ -36,7 +36,7 @@
 * {
     padding: 0px;
     margin: 0px;
-    font-family: "Torus";
+    font-family: "Torus", sans-serif;
     --fff: #fff;
     --accent: #009bda;
     --accentless: #009bdadd;
