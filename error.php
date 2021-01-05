@@ -14,7 +14,7 @@ include("includes.php");
     <meta name="author" content="name">
     <meta name="description" content="Seems like we're having some issues">
     <meta name="keywords" content="keywords,here">
-    <link rel="stylesheet" href="https://<?php echo $_SERVER['SERVER_NAME']; ?>/error.css" type="text/css">
+    <link rel="stylesheet" href="https://<?php echo $_SERVER['SERVER_NAME']; ?>/css/error.css" type="text/css">
 </head>
 
 <body style="height: 100vh">
