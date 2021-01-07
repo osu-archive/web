@@ -17,7 +17,7 @@ if(isset($_GET['v'])){
 }
 
 if(!isset($version)){
-    include("navbar.php");
+    include("obj_navbar.php");
     e404("Could not find this version...");
     exit;
 }
@@ -49,7 +49,7 @@ while($val = $sqlfinal->fetch_assoc()) {
 
 
 if($version_exists == false){
-    include("navbar.php");
+    include("obj_navbar.php");
     e404("Could not find this version...");
     exit;
 }
@@ -105,7 +105,7 @@ include("obj_navbar.php");
                         <p class="versionname"><?php echo $ver_val['Name']; ?> <span
                                 class="vn-thin"><?php echo $ver_val['Version']; ?></span></p>
                         <p class="bc-date"><?php echo date("F jS, Y", strtotime($ver_val['ReleaseDate'])); ?></p>
-                        <p class="bc-archiver">archived by <a class="bca-name"><?php echo $ver_val['Archiver']; ?></a></p>
+                        <p class="bc-archiver">archived by <a class="bca-name"><?php echo $ver_val['Archiver']; ?> • Submitted <?php echo time_elapsed_string($ver_val['DateAdded']); ?></a></p>
                     </div>
                     <div class="bc-right">
                         <div class="bc-views">
