@@ -8,6 +8,15 @@ include_once('addons/parsedown.php'); // to parse the markdown
 
 // set the $search variable
 
+if(isset($_GET['group'])){
+    $group = $_GET['group'];
+}else{
+    $group = "";
+}
+$group = htmlspecialchars(addslashes($group));
+
+
+
 if(isset($_GET['search'])){
     $search = $_GET['search'];
 }else{
@@ -16,16 +25,33 @@ if(isset($_GET['search'])){
 
 // {SECTION} : Version SQL
 
-if($search == ""){
-    $sql = "SELECT * FROM versions ORDER BY ReleaseDate DESC"; // default sql for getting versions
+if($group != "" || $search != ""){
+    if($search == ""){
+        $sql = "SELECT * FROM versions"; // default sql for getting versions
+        if($group != ""){
+            $sql .= " WHERE `group` = " . $group;
+        }
+        $sql .= " ORDER BY ReleaseDate DESC";
+    }else{
+        $queryinput = "%" . htmlspecialchars(addslashes($search)) . "%";
+        $sql = "SELECT * FROM versions WHERE";
+        
+        $sql .= "(Name LIKE '" . $queryinput . "' OR Archiver LIKE '" . $queryinput . "' OR VersionInfo LIKE '" . $queryinput . "' OR Version LIKE '" . $queryinput . "')";
+        
+        if($group != ""){
+            $sql .= "AND `group` = " . $group . " ";
+        }
+        
+        // sql for searching, we search the name, archiver, versioninfo, and version
+
+        $sql .= "ORDER BY ReleaseDate DESC";
+        // seperate ordering, in the future we'll have a dropdown for how to order
+    }
 }else{
-    $queryinput = "%" . htmlspecialchars(addslashes($search)) . "%";
-    $sql = "SELECT * FROM versions WHERE Name LIKE '" . $queryinput . "' OR Archiver LIKE '" . $queryinput . "' OR VersionInfo LIKE '" . $queryinput . "' OR Version LIKE '" . $queryinput . "'";
-    // sql for searching, we search the name, archiver, versioninfo, and version
-    
-    $sql .= "ORDER BY ReleaseDate DESC";
-    // seperate ordering, in the future we'll have a dropdown for how to order
+    $sql = "SELECT * FROM groups";
 }
+
+//echo $sql;
 
 // {SECTION} : news
 
@@ -42,14 +68,33 @@ LIMIT 3"; // sql by mulraf to get the top 3
 
 $t3 = $db->query($t3sql); // gonna run that too
 
+
+
 $versions = 0; // version counter
-$sqle = $db->query($sql); // run the version sql
+
+if($group != ""){
+    $sqle = $db->query($sql); // run the version sql
+}else{
+    $sqle = $db->query("SELECT * FROM versions");
+}
+
 while($val = $sqle->fetch_assoc()) { 
     $versions += 1; // count up
     // if its the first version
     if(!isset($screenshot)){
         $screenshots = grabshots($val); // get the screenshots
         $screenshot = $screenshots[0]; // get the first one
+    }
+}
+
+
+if($group != ""){
+    $groupname = "SELECT * FROM `groups` WHERE `id` = " . $group; // sql by mulraf to get the top 3
+
+    $groupsql = $db->query($groupname); // gonna run that too
+
+    while($val = $groupsql->fetch_assoc()) { 
+        $gname = $val['name'];
     }
 }
 
@@ -85,10 +130,19 @@ include("obj_navbar.php"); // include navbar
     <div class="versions">
         <div class="v-header">
             <div class="vh-top">
-                <p class="vh-text">Versions <span style="font-weight: 200; "><?php echo $versions?></span></p>
+                <p class="vh-text"><?php if($group != ""){
+                    echo $gname;
+                } else{
+                    echo "Groups";
+                } ?> <span style="font-weight: 200; "><?php echo $versions?>
+                <?php if($group == ""){
+                    echo " Versions";
+                }?>
+                </span></p>
             </div>
             <div class="vh-bottom">
                 <form action="./" method="get">
+                <input type="hidden" id="group" name="group" value="<?php echo $group; ?>"> 
                     <div class="search-bar">
                         <i class="fas fa-search"></i>
                         <input name="search" class="real-search-bar" value="<?php echo $search; ?>"
@@ -100,6 +154,7 @@ include("obj_navbar.php"); // include navbar
 
         <div class="v-content">
             <?php
+            if($group != "" || $search != ""){
             $found = false; // variable to see if a version was found
 
             $sqle = $db->query($sql);
@@ -181,7 +236,34 @@ include("obj_navbar.php"); // include navbar
         if($found == false){
             echo "No results found. Try a different search query."; // the search query didnt work or the sql went horribly wrong
         }
+    }else{
+
+        $sqle = $db->query("SELECT * FROM groups");
+        while($val = $sqle->fetch_assoc()) {
+            $vcount = $db->query("SELECT * FROM versions WHERE `group` = " . $val['id']);
+            $vecount = 0;
+            while($v = $vcount->fetch_assoc()) {
+                $vecount += 1;
+            }
         ?>
+            <div class="group" style="background-image: url('<?php echo $val['image']; ?>')">
+                <a class="group-a" href="<?php echo geturl(); ?>?group=<?php echo $val['id']; ?>">
+                    <div class="group-overlay">
+
+                    </div>
+                    <div class="group-inner">
+                        <div class="group-title-container">
+                            <p class="group-title"><?php echo $val['name']; ?></p>
+                            <p class="group-v-amount"><?php echo $vecount; ?> versions</p>
+                        </div>
+                        <p class="group-desc"><?php echo $val['description']; ?></p>
+                    </div>
+                </a>
+            </div>
+            <?php
+        }
+    }
+    ?>
         </div>
     </div>
     <div class="page-divider">
@@ -199,6 +281,7 @@ include("obj_navbar.php"); // include navbar
             </div>
             <div class="top3up-content">
                 <?php 
+              
             $count = 0; 
             while($val = $t3->fetch_assoc()) {
                 // top 3 users
@@ -221,7 +304,9 @@ include("obj_navbar.php"); // include navbar
                     </p>
                 </div>
                 <?php
-            } ?>
+            } 
+            ?>
+       
             </div>
             <div class="v-header">
                 <div class="vh-top">
