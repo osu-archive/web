@@ -390,6 +390,11 @@ body {
     color: var(--accent);
     margin-top: 8px;
     box-sizing: border-box;
+    text-decoration: none;
+}
+.np-but:hover{
+    background-color: var(--accent);
+    color: white;
 }
 
 .tu-user {
