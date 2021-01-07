@@ -51,8 +51,8 @@ function checkOnline($domain) {
         }
     }
   
-    if (!$full) $string = array_slice($string, 0, 1);
-    return $string ? implode(', ', $string) . ' ago' : 'just now';
+    if (!$full) $string = array_slice($string, 0, 2);
+    return $string ? implode(' and ', $string) . ' ago' : 'just now';
 }
 
 
