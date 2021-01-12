@@ -68,6 +68,8 @@ if(isset($_FILES['fileToUpload'])){
     $sql = "SELECT * FROM versions ORDER BY DateAdded DESC LIMIT 1";
 }
 else{
+    echo "This feature is currently unavailable due to security concerns.";
+    exit;
     if($_SESSION['role'] == "1"){
         header("Location: https://archive.osu.hubza.co.uk/error?error=You shouldn't be there.");
         die();

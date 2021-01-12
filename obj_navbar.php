@@ -14,9 +14,13 @@ $line = $f_contents[rand(0, count($f_contents) - 1)];
 ?>
 <!--
 <div class="notice" style="background-color: #ee1111; padding:10px;">
-    <p class="notice-text" style="color: white;"><i class="fas fa-exclamation-triangle"></i> Work is being performed on one of the servers we depend on, some screenshots and downloads could be non-functional.</p>
+    <p class="notice-text" style="color: white;"><i class="fas fa-exclamation-triangle"></i> One of the servers we depend on has broken, many screenshots and downloads will be non-functional.</p>
+</div>
+<div class="notice" style="background-color: #ff8811; padding:10px;">
+    <p class="notice-text" style="color: white;"><i class="fas fa-question-circle"></i> A temporary fix has been put in place for the afformentioned servers.</p>
 </div>
 -->
+
 <div class="header">
     <a class="header-top" href="https://<?php echo $_SERVER['SERVER_NAME']; ?>">
         <img src="https://<?php echo $_SERVER['SERVER_NAME']; ?>/img/logo.svg" class="ht-logo">

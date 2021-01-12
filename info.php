@@ -28,6 +28,7 @@ $sql = "SELECT * FROM versions WHERE `Version` = '" . $version . "'";
 
 $sqlfinal = $db->query($sql);
 while($val = $sqlfinal->fetch_assoc()) {
+    $id = $val['ID'];
     $version_exists = true;
     $screenshots = grabshots($val); 
     $screenshot = $screenshots[0];
@@ -54,10 +55,6 @@ if($version_exists == false){
     exit;
 }
 
-
-$viewCount = $viewCount + 1;
- 
-$updateSql = $db->query("UPDATE versions SET `Views` = " . $viewCount . " WHERE `Version` = '" . $version . "'");
 
 include("obj_navbar.php");
 
@@ -167,5 +164,9 @@ include("obj_navbar.php");
     </div>
     <?php
     include("obj_footer.php"); // footer
+
+    $viewCount = $viewCount + 1;
+
+$updateSql = $db->query("UPDATE versions SET `Views` = " . $viewCount . " WHERE `ID` = '" . $id . "'");
     ?>
 </div>
