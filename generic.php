@@ -116,39 +116,39 @@ $ip = $_SERVER['REMOTE_ADDR'];
 
 $piece = explode('.', $ip)[0];
 
-if(strpos($actual_link, "api") == true){
-
-}else{
-
-
-$hookObject = json_encode([
-    "content" => "Request sent",
-    "username" => "OA_ACCESS_LOGS",
-    "embeds" => [
-        [
-            "title" => $actual_link,
-            "type" => "rich",
-            "description" => "Request sent for " . $actual_link . " from " . $piece,
-            "url" => $actual_link,
-            "color" => hexdec( "FFFFFF" ),
-
-        ]
-    ]
-
-], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
-
-$ch = curl_init();
-
-curl_setopt_array( $ch, [
-    CURLOPT_URL => $webhook,
-    CURLOPT_POST => true,
-    CURLOPT_POSTFIELDS => $hookObject,
-    CURLOPT_HTTPHEADER => [
-        "Content-Type: application/json"
-    ]
-]);
-
-$response = curl_exec( $ch );
-curl_close( $ch );
-    }
+//if(strpos($actual_link, "api") == true){
+//
+//}else{
+//
+//
+//$hookObject = json_encode([
+//    "content" => "Request sent",
+//    "username" => "OA_ACCESS_LOGS",
+//    "embeds" => [
+//        [
+//            "title" => $actual_link,
+//            "type" => "rich",
+//            "description" => "Request sent for " . $actual_link . " from " . $piece,
+//            "url" => $actual_link,
+//            "color" => hexdec( "FFFFFF" ),
+//
+//        ]
+//    ]
+//
+//], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+//
+//$ch = curl_init();
+//
+//curl_setopt_array( $ch, [
+//    CURLOPT_URL => $webhook,
+//    CURLOPT_POST => true,
+//    CURLOPT_POSTFIELDS => $hookObject,
+//    CURLOPT_HTTPHEADER => [
+//        "Content-Type: application/json"
+//    ]
+//]);
+//
+//$response = curl_exec( $ch );
+//curl_close( $ch );
+//    }
 ?>
